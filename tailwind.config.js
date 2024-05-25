@@ -12,7 +12,7 @@ export default {
       black: '#03060B',
       white: '#F8FAFD',
       geraldine: '#FF8F94',
-      blue: '##8FB4FF',
+      blue: '#8FB4FF',
       ligthblue: '#EBF1FF',
     },
     fontFamily: {
