@@ -14,6 +14,7 @@ export default {
       geraldine: '#FF8F94',
       blue: '#8FB4FF',
       ligthblue: '#EBF1FF',
+      red: '#D70000',
     },
     fontFamily: {
       custom: ['EB Garamond', 'sans-serif'],
