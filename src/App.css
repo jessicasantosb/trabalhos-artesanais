@@ -4,16 +4,10 @@
 
 @layer base {
   html {
-    @apply font-custom bg-white text-black;
+    /* @apply font-custom bg-white text-black; */
   }
   .center {
     @apply flex items-center justify-center;
-  }
-  label {
-    @apply text-lg;
-  } 
-  input {
-    @apply w-full h-10 p-2 rounded-lg;
   }
   .button {
     @apply w-full h-10 bg-blue my-8 uppercase font-bold rounded-lg hover:bg-geraldine;

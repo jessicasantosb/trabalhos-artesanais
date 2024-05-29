@@ -1,8 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  createUserWithEmailAndPassword,
+  signOut,
+  updateProfile,
+} from 'firebase/auth';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import Input from '../components/Input';
+import { auth } from '../services/firebaseConnection';
 
 const schema = z
   .object({
@@ -27,14 +34,33 @@ const schema = z
 type formData = z.infer<typeof schema>;
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<formData>({ resolver: zodResolver(schema), mode: 'onChange' });
 
+  useEffect(() => {
+    const logout = async () => {
+      signOut(auth);
+    };
+
+    logout();
+  }, []);
+
   const onSubmit = (data: formData) => {
-    console.log(data);
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then(async (user) => {
+        await updateProfile(user.user, {
+          displayName: data.name,
+        });
+        navigate('/login', { replace: true });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

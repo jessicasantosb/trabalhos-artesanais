@@ -1,8 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import Input from '../components/Input';
+import { auth } from '../services/firebaseConnection';
 
 const schema = z.object({
   email: z
@@ -15,22 +18,41 @@ const schema = z.object({
 type formData = z.infer<typeof schema>;
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<formData>({ resolver: zodResolver(schema), mode: 'onChange' });
 
+  useEffect(() => {
+    const logout = async () => {
+      signOut(auth);
+    };
+
+    logout();
+  }, []);
+
   const onSubmit = (data: formData) => {
-    console.log(data);
-  }
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        navigate('/', { replace: true });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <section className='w-full pt-12 px-4 center flex-col'>
       <h1 className='pb-4 font-medium text-4xl text-center'>Bem vindo!</h1>
 
       <main className='bg-ligthblue my-8 p-4 w-full max-w-md'>
-        <form className='flex flex-col m-auto' onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className='flex flex-col m-auto'
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Input
             label='Email:'
             type='email'
