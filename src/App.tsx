@@ -5,6 +5,7 @@ import AuthProvider from './context/AuthContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Private from './routes/Private';
 
 function App() {
   const router = createBrowserRouter([
@@ -14,7 +15,11 @@ function App() {
       children: [
         {
           index: true,
-          element: <Home />,
+          element: (
+            <Private>
+              <Home />
+            </Private>
+          ),
         },
         {
           path: 'login',
