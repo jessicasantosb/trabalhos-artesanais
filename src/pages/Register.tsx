@@ -4,11 +4,12 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import Input from '../components/Input';
+import { AuthContext } from '../context/AuthContext';
 import { auth } from '../services/firebaseConnection';
 
 const schema = z
@@ -35,6 +36,7 @@ type formData = z.infer<typeof schema>;
 
 export default function Register() {
   const navigate = useNavigate();
+  const { handleUserInfo } = useContext(AuthContext);
 
   const {
     register,
@@ -55,6 +57,12 @@ export default function Register() {
       .then(async (user) => {
         await updateProfile(user.user, {
           displayName: data.name,
+        });
+
+        handleUserInfo({
+          uid: user.user.uid,
+          name: data.name,
+          email: data.email,
         });
         navigate('/login', { replace: true });
       })
