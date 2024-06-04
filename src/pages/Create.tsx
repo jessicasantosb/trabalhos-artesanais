@@ -52,16 +52,18 @@ export default function Create() {
       </p>
       <div className='w-full max-w-xl m-auto flex flex-col gap-4 '>
         <div className='h-16'>
-          <button className='h-full w-16 center cursor-pointer bg-geraldine'>
+          <button className='h-full w-16 center bg-geraldine'>
             <GoUpload
               size={30}
-              className='absolute cursor-pointer text-white'
+              className='absolute text-white pointer-events-none'
             />
-            <input
-              type='file'
-              accept='image/*'
-              className='opacity-0 cursor-pointer'
-            />
+            <label className='h-full w-full cursor-pointer' arial-hidden="true">
+              <input
+                type='file'
+                accept='image/*'
+                className='opacity-0 hidden'
+              />
+            </label>
           </button>
         </div>
 
