@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Layout from './components/Layout';
 import AuthProvider from './context/AuthContext';
+import Create from './pages/Create';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -18,6 +19,15 @@ function App() {
           element: (
             <Private>
               <Home />
+            </Private>
+          ),
+        },
+        {
+          path: 'create',
+          element: (
+            <Private>
+              {' '}
+              <Create />
             </Private>
           ),
         },
