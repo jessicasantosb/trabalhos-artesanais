@@ -1,8 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
+import { ChangeEvent, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { GoUpload } from 'react-icons/go';
+import { GoTrash, GoUpload } from 'react-icons/go';
+import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 import Input from '../components/Input';
+import { AuthContext } from '../context/AuthContext';
+import { storage } from '../services/firebaseConnection';
 
 export interface ProjectProps {
   id: number;
@@ -14,6 +24,13 @@ export interface ProjectProps {
   color: string;
   size: string;
   description: string;
+}
+
+interface ImageItemProps {
+  uid: string;
+  name: string;
+  previewUrl: string;
+  url: string;
 }
 
 const schema = z.object({
@@ -29,6 +46,8 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function Create() {
+  const [projectImage, setProjectImage] = useState<ImageItemProps[]>([]);
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -38,6 +57,59 @@ export default function Create() {
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
+
+  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const image = e.target.files[0];
+
+      if (image.type === 'image/jpeg' || image.type === 'image/png') {
+        handleUpload(image);
+      } else {
+        alert('Envie apenas imagem jpeg ou png.');
+        return;
+      }
+    }
+  };
+
+  const handleUpload = async (image: File) => {
+    if (!user?.uid) {
+      return;
+    }
+
+    const currentUid = user?.uid;
+    const uidImage = uuidV4();
+
+    const uploadRef = ref(storage, `images/${currentUid}/${uidImage}`);
+
+    if (projectImage.length < 5) {
+      uploadBytes(uploadRef, image).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((downloadUrl) => {
+          const imageItem = {
+            name: uidImage,
+            uid: currentUid,
+            previewUrl: URL.createObjectURL(image),
+            url: downloadUrl,
+          };
+
+          setProjectImage((images) => [...images, imageItem]);
+        });
+      });
+    } else {
+      alert('Quantidade máxima de imagens atingida');
+    }
+  };
+
+  const handleDeleteImage = async (item: ImageItemProps) => {
+    const imagePath = `images/${item.uid}/${item.name}`;
+    const imageRef = ref(storage, imagePath);
+
+    try {
+      await deleteObject(imageRef);
+      setProjectImage(projectImage.filter((image) => image.url !== item.url));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const onSubmit = (data: FormData) => {
     console.log(data);
@@ -51,8 +123,8 @@ export default function Create() {
         esqueça de clicar em salvar
       </p>
       <div className='w-full max-w-xl m-auto flex flex-col gap-4 '>
-        <div className='h-16'>
-          <button className='h-full w-16 center cursor-pointer bg-geraldine'>
+        <div className='grid grid-cols-3 gap-2 sm:h-24 sm:flex'>
+          <button className='h-full sm:w-24 center cursor-pointer bg-geraldine'>
             <GoUpload
               size={30}
               className='absolute cursor-pointer text-white'
@@ -61,8 +133,30 @@ export default function Create() {
               type='file'
               accept='image/*'
               className='opacity-0 cursor-pointer'
+              onChange={handleFile}
             />
           </button>
+          {projectImage.map((image) => {
+            return (
+              <div
+                key={image.name}
+                className='group w-full h-full center relative'
+              >
+                <button>
+                  <GoTrash
+                    size={32}
+                    className='absolute bottom-0 right-0 hidden group-hover:block bg-geraldine text-white p-1'
+                    onClick={() => handleDeleteImage(image)}
+                  />
+                </button>
+                <img
+                  src={image.url}
+                  alt={image.name}
+                  className='w-full h-full object-cover '
+                />
+              </div>
+            );
+          })}
         </div>
 
         <form
