@@ -57,13 +57,13 @@ export default function Create() {
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
-
+  
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const image = e.target.files[0];
-
-      if (image.type === 'image/jpeg' || image.type === 'image/png') {
-        handleUpload(image);
+      
+      if (image.type === 'image/jpeg' || image.type === 'image/png') {        
+        handleUpload(image);        
       } else {
         alert('Envie apenas imagem jpeg ou png.');
         return;
@@ -122,25 +122,27 @@ export default function Create() {
         adicione nos campos abaixo os dados do seu novo trabalho e não se
         esqueça de clicar em salvar
       </p>
-      <div className='w-full max-w-xl m-auto flex flex-col gap-4 '>
-        <div className='grid grid-cols-3 gap-2 sm:h-24 sm:flex'>
-          <button className='h-full sm:w-24 center cursor-pointer bg-geraldine'>
+      <div>
+        <div className='flex flex-wrap max-w-24 sm:flex-nowrap gap-2 mb-4'>
+          <button className='h-24 w-full max-w-24 center bg-geraldine'>
             <GoUpload
               size={30}
-              className='absolute cursor-pointer text-white'
+              className='absolute text-white pointer-events-none'
             />
-            <input
-              type='file'
-              accept='image/*'
-              className='opacity-0 cursor-pointer'
-              onChange={handleFile}
-            />
+            <label className='h-full w-full cursor-pointer' arial-hidden='true'>
+              <input
+                type='file'
+                accept='image/*'
+                className='opacity-0 hidden'
+                onChange={handleFile}
+              />
+            </label>
           </button>
           {projectImage.map((image) => {
             return (
               <div
                 key={image.name}
-                className='group w-full h-full center relative'
+                className='group h-24 w-full center relative bg-geraldine'
               >
                 <button>
                   <GoTrash
