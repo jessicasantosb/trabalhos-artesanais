@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { addDoc, collection } from 'firebase/firestore';
 import {
   deleteObject,
   getDownloadURL,
@@ -8,11 +9,12 @@ import {
 import { ChangeEvent, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { GoTrash, GoUpload } from 'react-icons/go';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
-import { storage } from '../services/firebaseConnection';
+import { db, storage } from '../services/firebaseConnection';
 
 export interface ProjectProps {
   id: number;
@@ -57,13 +59,14 @@ export default function Create() {
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
-  
+  const navigate = useNavigate();
+
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const image = e.target.files[0];
-      
-      if (image.type === 'image/jpeg' || image.type === 'image/png') {        
-        handleUpload(image);        
+
+      if (image.type === 'image/jpeg' || image.type === 'image/png') {
+        handleUpload(image);
       } else {
         alert('Envie apenas imagem jpeg ou png.');
         return;
@@ -112,7 +115,40 @@ export default function Create() {
   };
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    if (projectImage.length === 0) {
+      alert('Envie ao menos uma imagem.');
+      return;
+    }
+
+    const projectImagesList = projectImage.map((item) => {
+      return {
+        uid: item.uid,
+        name: item.name,
+        url: item.url,
+      };
+    });
+
+    addDoc(collection(db, 'trabalhos'), {
+      title: data.title,
+      date: data.date,
+      client: data.client,
+      price: data.price,
+      color: data.color,
+      size: data.size,
+      description: data.description,
+      created: new Date(),
+      owner: user?.name,
+      uid: user?.uid,
+      images: projectImagesList,
+    })
+      .then(() => {
+        reset();
+        setProjectImage([]);
+        navigate('/', { replace: true });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -123,7 +159,7 @@ export default function Create() {
         esqueça de clicar em salvar
       </p>
       <div>
-        <div className='flex flex-wrap max-w-24 sm:flex-nowrap gap-2 mb-4'>
+        <div className='flex flex-wrap gap-2 mb-4'>
           <button className='h-24 w-full max-w-24 center bg-geraldine'>
             <GoUpload
               size={30}
@@ -140,10 +176,7 @@ export default function Create() {
           </button>
           {projectImage.map((image) => {
             return (
-              <div
-                key={image.name}
-                className='group h-24 w-full center relative bg-geraldine'
-              >
+              <div key={image.name} className='group h-24 center basis-24 grow'>
                 <button>
                   <GoTrash
                     size={32}
@@ -154,7 +187,7 @@ export default function Create() {
                 <img
                   src={image.url}
                   alt={image.name}
-                  className='w-full h-full object-cover '
+                  className='w-full h-full object-cover'
                 />
               </div>
             );
