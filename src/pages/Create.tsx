@@ -120,6 +120,8 @@ export default function Create() {
       return;
     }
 
+    const dateFormated = data.date.toLocaleDateString('pt-BR');
+
     const projectImagesList = projectImage.map((item) => {
       return {
         uid: item.uid,
@@ -130,7 +132,7 @@ export default function Create() {
 
     addDoc(collection(db, 'trabalhos'), {
       title: data.title,
-      date: data.date,
+      date: dateFormated,
       client: data.client,
       price: data.price,
       color: data.color,
