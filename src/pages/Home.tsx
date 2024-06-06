@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import HomeCard from '../components/HomeCard';
 import HomePanel from '../components/HomePanel';
@@ -27,13 +27,12 @@ export default function Home() {
   useEffect(() => {
     const loadProjects = () => {
       const projectRef = collection(db, 'trabalhos');
-      const queryRef = query(projectRef, orderBy('created', 'desc'));
+      const queryRef = query(projectRef, where("uid", "==", user?.uid));
 
       getDocs(queryRef).then((snapshot) => {
         let projectsList = [] as ProjectsProps[];
 
         snapshot.forEach((doc) => {
-          if (doc.data().uid === user?.uid) {
             projectsList.push({
               id: doc.id,
               image: doc.data().images,
@@ -42,7 +41,6 @@ export default function Home() {
               client: doc.data().client,
               price: doc.data().price,
             });
-          }
         });
 
         setProjects(projectsList);
