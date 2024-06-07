@@ -19,7 +19,7 @@ interface ImagesProps {
   url: string;
 }
 
-export interface ProjectsProps {
+interface ProjectProps {
   id: string;
   images: ImagesProps[];
   title: string;
@@ -29,7 +29,7 @@ export interface ProjectsProps {
 }
 
 export default function Home() {
-  const [projects, setProjects] = useState<ProjectsProps[]>([]);
+  const [projects, setProjects] = useState<ProjectProps[]>([]);
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Home() {
       const queryRef = query(projectRef, where('uid', '==', user?.uid));
 
       getDocs(queryRef).then((snapshot) => {
-        let projectsList = [] as ProjectsProps[];
+        let projectsList = [] as ProjectProps[];
 
         snapshot.forEach((doc) => {
           projectsList.push({
@@ -58,7 +58,7 @@ export default function Home() {
     loadProjects();
   }, []);
 
-  const handleDeleteProject = async (project: ProjectsProps) => {
+  const handleDeleteProject = async (project: ProjectProps) => {
     const projectItem = project;
 
     const docRef = doc(db, 'trabalhos', project.id);

@@ -16,18 +16,6 @@ import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../services/firebaseConnection';
 
-export interface ProjectProps {
-  id: number;
-  image: string;
-  title: string;
-  date: string;
-  client: string;
-  price: string;
-  color: string;
-  size: string;
-  description: string;
-}
-
 interface ImageItemProps {
   uid: string;
   name: string;
