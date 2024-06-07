@@ -1,19 +1,27 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
+import { deleteObject, ref } from 'firebase/storage';
 import { useContext, useEffect, useState } from 'react';
 import HomeCard from '../components/HomeCard';
 import HomePanel from '../components/HomePanel';
 import { AuthContext } from '../context/AuthContext';
-import { db } from '../services/firebaseConnection';
+import { db, storage } from '../services/firebaseConnection';
 
-interface ImageProps {
+interface ImagesProps {
   name: string;
   uid: string;
   url: string;
 }
 
-interface ProjectsProps {
+export interface ProjectsProps {
   id: string;
-  image: ImageProps[];
+  images: ImagesProps[];
   title: string;
   date: string;
   client: string;
@@ -27,20 +35,20 @@ export default function Home() {
   useEffect(() => {
     const loadProjects = () => {
       const projectRef = collection(db, 'trabalhos');
-      const queryRef = query(projectRef, where("uid", "==", user?.uid));
+      const queryRef = query(projectRef, where('uid', '==', user?.uid));
 
       getDocs(queryRef).then((snapshot) => {
         let projectsList = [] as ProjectsProps[];
 
         snapshot.forEach((doc) => {
-            projectsList.push({
-              id: doc.id,
-              image: doc.data().images,
-              title: doc.data().title,
-              date: doc.data().date,
-              client: doc.data().client,
-              price: doc.data().price,
-            });
+          projectsList.push({
+            id: doc.id,
+            images: doc.data().images,
+            title: doc.data().title,
+            date: doc.data().date,
+            client: doc.data().client,
+            price: doc.data().price,
+          });
         });
 
         setProjects(projectsList);
@@ -50,21 +58,43 @@ export default function Home() {
     loadProjects();
   }, []);
 
+  const handleDeleteProject = async (project: ProjectsProps) => {
+    const projectItem = project;
+
+    const docRef = doc(db, 'trabalhos', project.id);
+    await deleteDoc(docRef);
+
+    projectItem.images.map(async (image) => {
+      const imagePath = `images/${image.uid}/${image.name}`;
+      const imageRef = ref(storage, imagePath);
+
+      try {
+        await deleteObject(imageRef);
+        setProjects(
+          projects.filter((project) => project.id !== projectItem.id)
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  };
+
   return (
     <section className='min-h-screen container m-auto p-4'>
       <HomePanel />
       {projects.length ? (
         <main className='my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4'>
-          {projects.map(({ id, image, title, date, client, price }) => {
+          {projects.map((project) => {
             return (
               <HomeCard
-                key={id}
-                id={id}
-                image={image[0].url}
-                title={title}
-                date={date}
-                client={client}
-                price={price}
+                key={project.id}
+                id={project.id}
+                image={project.images[0].url}
+                title={project.title}
+                date={project.date}
+                client={project.client}
+                price={project.price}
+                handleDeleteProject={() => handleDeleteProject(project)}
               />
             );
           })}
