@@ -119,11 +119,11 @@ export default function Create() {
     });
 
     addDoc(collection(db, 'trabalhos'), {
-      title: data.title,
+      title: data.title.toUpperCase(),
       date: dateFormated,
       client: data.client,
       price: data.price,
-      color: data.color,
+      color: data.color.toUpperCase(),
       size: data.size,
       description: data.description,
       created: new Date(),
@@ -225,7 +225,7 @@ export default function Create() {
           <Input
             name='color'
             type='text'
-            label='Cores Principais:'
+            label='Cor Principal:'
             placeholder='ex: Marrom'
             register={register}
             error={errors.color?.message}

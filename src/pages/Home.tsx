@@ -30,33 +30,35 @@ interface ProjectProps {
 
 export default function Home() {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
+  const [inputTitle, setInputTitle] = useState('');
+  const [inputColor, setInputColor] = useState('');
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    const loadProjects = () => {
-      const projectRef = collection(db, 'trabalhos');
-      const queryRef = query(projectRef, where('uid', '==', user?.uid));
-
-      getDocs(queryRef).then((snapshot) => {
-        let projectsList = [] as ProjectProps[];
-
-        snapshot.forEach((doc) => {
-          projectsList.push({
-            id: doc.id,
-            images: doc.data().images,
-            title: doc.data().title,
-            date: doc.data().date,
-            client: doc.data().client,
-            price: doc.data().price,
-          });
-        });
-
-        setProjects(projectsList);
-      });
-    };
-
     loadProjects();
   }, []);
+
+  const loadProjects = () => {
+    const projectRef = collection(db, 'trabalhos');
+    const queryRef = query(projectRef, where('uid', '==', user?.uid));
+
+    getDocs(queryRef).then((snapshot) => {
+      let projectsList = [] as ProjectProps[];
+
+      snapshot.forEach((doc) => {
+        projectsList.push({
+          id: doc.id,
+          images: doc.data().images,
+          title: doc.data().title,
+          date: doc.data().date,
+          client: doc.data().client,
+          price: doc.data().price,
+        });
+      });
+
+      setProjects(projectsList);
+    });
+  };
 
   const handleDeleteProject = async (project: ProjectProps) => {
     const projectItem = project;
@@ -79,9 +81,50 @@ export default function Home() {
     });
   };
 
+  const handleSearch = async (field: string, input: string) => {
+    if (input === '') {
+      loadProjects();
+      return;
+    }
+
+    setProjects([]);
+
+    const q = query(
+      collection(db, 'trabalhos'),
+      where('uid', '==', user?.uid),
+      where(field, '>=', input.toUpperCase()),
+      where(field, '<=', input.toUpperCase() + '\uf8ff')
+    );
+
+    const querySnapshot = await getDocs(q);
+    
+    let projectsList = [] as ProjectProps[];
+
+    querySnapshot.forEach((doc) => {
+      projectsList.push({
+        id: doc.id,
+        images: doc.data().images,
+        title: doc.data().title,
+        date: doc.data().date,
+        client: doc.data().client,
+        price: doc.data().price,
+      });
+    });
+
+    setProjects(projectsList);
+  };
+
   return (
     <section className='min-h-screen container m-auto p-4'>
-      <HomePanel />
+      <HomePanel
+        inputTitle={inputTitle}
+        setInputTitle={setInputTitle}
+        handleSearchTitle={() => handleSearch('title', inputTitle)}
+        inputColor={inputColor}
+        setInputColor={setInputColor}
+        handleSearchColor={() => handleSearch('color', inputColor)}
+      />
+
       {projects.length ? (
         <main className='my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4'>
           {projects.map((project) => {
