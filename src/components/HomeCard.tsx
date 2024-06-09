@@ -30,7 +30,7 @@ export default function HomeCard({
 
   return (
     <>
-      <div className='group relative h-64 grid grid-rows-2 shadow-md shadow-geraldine rounded-xl'>
+      <div className='group relative shadow-md shadow-geraldine rounded-xl'>
         <button
           className='absolute right-0 p-1 bg-geraldine hidden group-hover:block'
           onClick={handleDeleteProject}
@@ -38,7 +38,7 @@ export default function HomeCard({
           <GoTrash size={18} />
         </button>
 
-        <div className='flex'>
+        <div className='h-40 flex'>
           <div className={`center h-full min-w-full ${!skeleton && 'hidden'}`}>
             <CiImageOn size={32} className='text-geraldine' />
           </div>
@@ -54,17 +54,23 @@ export default function HomeCard({
 
         <Link to={`project/${id}`}>
           <div>
-            <h4 className='p-2 uppercase font-bold tracking-tight break-words line-clamp-2'>
+            <h4 className='h-14 p-2 font-bold tracking-tight break-words line-clamp-2'>
               {title}
             </h4>
-            <p className='px-2 italic pb-2'>{date}</p>
+            <p className='p-2 italic'>{date}</p>
           </div>
           <div className='p-2'>
-            <p>
-              cliente: <span className='font-semibold uppercase'>{client}</span>
+            <p className='flex gap-1'>
+              cliente:
+              <span className='font-semibold uppercase break-words line-clamp-1'>
+                {client}
+              </span>
             </p>
-            <p>
-              valor: <span className='font-semibold'>{price}</span>
+            <p className='flex gap-1'>
+              valor:
+              <span className='font-semibold  break-words line-clamp-1'>
+                {price}
+              </span>
             </p>
           </div>
         </Link>

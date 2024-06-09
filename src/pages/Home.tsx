@@ -63,22 +63,28 @@ export default function Home() {
   const handleDeleteProject = async (project: ProjectProps) => {
     const projectItem = project;
 
-    const docRef = doc(db, 'trabalhos', project.id);
-    await deleteDoc(docRef);
+    const answer = window.confirm(
+      'Tem certeza que deseja apagar esse trabalho?'
+    );
 
-    projectItem.images.map(async (image) => {
-      const imagePath = `images/${image.uid}/${image.name}`;
-      const imageRef = ref(storage, imagePath);
+    if (answer) {
+      const docRef = doc(db, 'trabalhos', project.id);
+      await deleteDoc(docRef);
 
-      try {
-        await deleteObject(imageRef);
-        setProjects(
-          projects.filter((project) => project.id !== projectItem.id)
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    });
+      projectItem.images.map(async (image) => {
+        const imagePath = `images/${image.uid}/${image.name}`;
+        const imageRef = ref(storage, imagePath);
+
+        try {
+          await deleteObject(imageRef);
+          setProjects(
+            projects.filter((project) => project.id !== projectItem.id)
+          );
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    }
   };
 
   const handleSearch = async (field: string, input: string) => {
@@ -97,7 +103,7 @@ export default function Home() {
     );
 
     const querySnapshot = await getDocs(q);
-    
+
     let projectsList = [] as ProjectProps[];
 
     querySnapshot.forEach((doc) => {
@@ -126,7 +132,7 @@ export default function Home() {
       />
 
       {projects.length ? (
-        <main className='my-8 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4'>
+        <main className='my-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4'>
           {projects.map((project) => {
             return (
               <HomeCard
