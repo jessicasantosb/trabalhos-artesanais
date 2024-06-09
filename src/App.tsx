@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Private from './routes/Private';
+import Project from './pages/Project';
 
 function App() {
   const router = createBrowserRouter([
@@ -26,8 +27,15 @@ function App() {
           path: 'create',
           element: (
             <Private>
-              {' '}
               <Create />
+            </Private>
+          ),
+        },
+        {
+          path: 'project/:id',
+          element: (
+            <Private>
+              <Project />
             </Private>
           ),
         },
