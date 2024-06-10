@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <header className='w-full sm:shadow-lg'>
+    <header className='w-full shadow-lg'>
       <nav className='container m-auto px-4 h-[60px] center justify-between'>
         <Link to={'/'}>
           <img src={logo} alt='logo' className='h-10' />
@@ -25,7 +25,7 @@ export default function Header() {
         {!loadingAuth && isSigned && (
           <div>
             <div
-              className={`w-full bg-white absolute top-[60px] right-0 px-2 py-8 center flex-col gap-4 rounded shadow-lg transition-all md:relative md:top-0 md:p-0 md:flex-row md:gap-6 md:shadow-none ${
+              className={`w-full bg-white absolute top-[60px] right-0 px-2 py-8 center flex-col gap-4 rounded shadow-lg transition-all md:relative md:top-0 md:p-0 md:flex-row md:gap-6 md:shadow-none z-50 ${
                 !isDropdown && 'hidden md:flex'
               }`}
             >
