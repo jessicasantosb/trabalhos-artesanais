@@ -9,6 +9,10 @@
   .center {
     @apply flex items-center justify-center;
   }
+  /* header */
+  .headerBtn {
+    @apply center gap-2 w-28 h-10 border bg-opacity-80 shadow-md hover:shadow-none hover:bg-opacity-70 hover:scale-95 transition-all
+  }
   /* login/register */
   .button {
     @apply w-full h-10 bg-blue my-6 uppercase font-bold rounded-lg hover:bg-geraldine;
