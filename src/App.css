@@ -12,4 +12,13 @@
   .button {
     @apply w-full h-10 bg-blue my-8 uppercase font-bold rounded-lg hover:bg-geraldine;
   }
+  .filterBtnDiv {
+    @apply flex bg-ligthblue;
+  }
+  .filterBtnInput {
+    @apply border-none bg-ligthblue p-2 outline-none focus:outline-none;
+  }
+  .filterBtn {
+    @apply m-1 bg-geraldine px-4 py-2 text-white
+  }
 }
