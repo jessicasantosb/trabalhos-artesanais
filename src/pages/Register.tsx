@@ -11,6 +11,7 @@ import { z } from 'zod';
 import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../services/firebaseConnection';
+import toast from 'react-hot-toast';
 
 const schema = z
   .object({
@@ -64,6 +65,8 @@ export default function Register() {
           name: data.name,
           email: data.email,
         });
+        
+        toast.success('Registrado com sucesso!');
         navigate('/login', { replace: true });
       })
       .catch((error) => {

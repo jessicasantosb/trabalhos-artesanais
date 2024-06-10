@@ -1,13 +1,17 @@
+import { Toaster } from 'react-hot-toast';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
+
 import Layout from './components/Layout';
+
 import AuthProvider from './context/AuthContext';
+
 import Create from './pages/Create';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Project from './pages/Project';
 import Register from './pages/Register';
 import Private from './routes/Private';
-import Project from './pages/Project';
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +57,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <Toaster position='top-center' reverseOrder={false} />
       <RouterProvider router={router} />;
     </AuthProvider>
   );

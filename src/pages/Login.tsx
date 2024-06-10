@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import Input from '../components/Input';
 import { auth } from '../services/firebaseConnection';
+import toast from 'react-hot-toast';
 
 const schema = z.object({
   email: z
@@ -37,6 +38,7 @@ export default function Login() {
   const onSubmit = (data: formData) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
+        toast.success("Logado com sucesso!")
         navigate('/', { replace: true });
       })
       .catch((error) => {

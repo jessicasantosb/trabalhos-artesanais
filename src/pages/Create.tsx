@@ -15,6 +15,7 @@ import { z } from 'zod';
 import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../services/firebaseConnection';
+import toast from 'react-hot-toast';
 
 interface ImageItemProps {
   uid: string;
@@ -134,6 +135,7 @@ export default function Create() {
       .then(() => {
         reset();
         setProjectImage([]);
+        toast.success('Criado com sucesso!');
         navigate('/', { replace: true });
       })
       .catch((error) => {
