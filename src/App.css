@@ -4,14 +4,16 @@
 
 @layer base {
   html {
-    /* @apply font-custom bg-white text-black; */
+    @apply font-custom bg-white text-black;
   }
   .center {
     @apply flex items-center justify-center;
   }
+  /* login/register */
   .button {
-    @apply w-full h-10 bg-blue my-8 uppercase font-bold rounded-lg hover:bg-geraldine;
+    @apply w-full h-10 bg-blue my-6 uppercase font-bold rounded-lg hover:bg-geraldine;
   }
+  /* home panel */
   .filterBtnDiv {
     @apply flex bg-ligthblue;
   }

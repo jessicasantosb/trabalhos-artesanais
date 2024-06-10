@@ -4,7 +4,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
@@ -36,6 +36,7 @@ const schema = z
 type formData = z.infer<typeof schema>;
 
 export default function Register() {
+  const [error, setError] = useState("")
   const navigate = useNavigate();
   const { handleUserInfo } = useContext(AuthContext);
 
@@ -71,6 +72,11 @@ export default function Register() {
       })
       .catch((error) => {
         console.error(error);
+         if (error.code === 'auth/weak-password') {
+           setError('Senha fraca');
+         } else if (error.code === 'auth/email-already-in-use') {
+           setError('Este email já está em uso');
+         }
       });
   };
 
@@ -115,6 +121,7 @@ export default function Register() {
             register={register}
           />
 
+          {error && <p className='text-red pt-4'>{error}</p>}
           <button className='button'>Cadastrar</button>
         </form>
 

@@ -1,12 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import Input from '../components/Input';
 import { auth } from '../services/firebaseConnection';
-import toast from 'react-hot-toast';
 
 const schema = z.object({
   email: z
@@ -19,6 +19,7 @@ const schema = z.object({
 type formData = z.infer<typeof schema>;
 
 export default function Login() {
+  const [error, setError] = useState("")
   const navigate = useNavigate();
 
   const {
@@ -38,11 +39,16 @@ export default function Login() {
   const onSubmit = (data: formData) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
-        toast.success("Logado com sucesso!")
+        toast.success('Logado com sucesso!');
         navigate('/', { replace: true });
       })
       .catch((error) => {
         console.error(error);
+        if (error.code === 'auth/invalid-credential') {
+          setError('Confira seus dados');
+        } else if (error.code === 'auth/invalid-email') {
+          setError('Confira seu email');
+        }
       });
   };
 
@@ -71,6 +77,7 @@ export default function Login() {
             register={register}
           />
 
+          {error && <p className='text-red pt-4'>{error}</p>}
           <button className='button'>Entrar</button>
         </form>
 
