@@ -12,6 +12,7 @@ import HomeCard from '../components/HomeCard';
 import HomePanel from '../components/HomePanel';
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../services/firebaseConnection';
+import toast from 'react-hot-toast';
 
 interface ImagesProps {
   name: string;
@@ -32,7 +33,19 @@ export default function Home() {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
   const [inputTitle, setInputTitle] = useState('');
   const [inputColor, setInputColor] = useState('');
+  const [inputYear, setInputYear] = useState('');
+
   const { user } = useContext(AuthContext);
+  let years: number[] = [];
+
+  projects.forEach((project) => {
+    const date = new Date(project.date);
+    const year = date.getFullYear();
+    if (!years.includes(year)) {
+      years.push(year);
+    }
+    years.sort();
+  });
 
   useEffect(() => {
     loadProjects();
@@ -77,6 +90,7 @@ export default function Home() {
 
         try {
           await deleteObject(imageRef);
+          toast.success('Deletado com sucesso!');
           setProjects(
             projects.filter((project) => project.id !== projectItem.id)
           );
@@ -88,19 +102,37 @@ export default function Home() {
   };
 
   const handleSearch = async (field: string, input: string) => {
-    if (input === '') {
+    if (input === '' || input === 'all') {      
       loadProjects();
       return;
     }
 
     setProjects([]);
 
-    const q = query(
-      collection(db, 'trabalhos'),
-      where('uid', '==', user?.uid),
-      where(field, '>=', input.toUpperCase()),
-      where(field, '<=', input.toUpperCase() + '\uf8ff')
-    );
+    let q;
+
+    if (field === 'date') {
+      projects.forEach((project) => {
+        const date = new Date(project.date);
+        const year = date.getFullYear();
+        if (input === year.toString()) {
+          input = project.date;
+        }
+      });
+
+      q = query(
+        collection(db, 'trabalhos'),
+        where('uid', '==', user?.uid),
+        where(field, '==', input)
+      );
+    } else {
+      q = query(
+        collection(db, 'trabalhos'),
+        where('uid', '==', user?.uid),
+        where(field, '>=', input.toUpperCase()),
+        where(field, '<=', input.toUpperCase() + '\uf8ff')
+      );
+    }
 
     const querySnapshot = await getDocs(q);
 
@@ -129,6 +161,10 @@ export default function Home() {
         inputColor={inputColor}
         setInputColor={setInputColor}
         handleSearchColor={() => handleSearch('color', inputColor)}
+        years={years}
+        inputYear={inputYear}
+        setInputYear={setInputYear}
+        handleSearchYear={handleSearch}
       />
 
       {projects.length ? (

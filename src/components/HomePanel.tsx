@@ -10,6 +10,10 @@ interface HomePanelProps {
   inputColor: string;
   setInputColor: (event: string) => void;
   handleSearchColor: (event: React.MouseEvent<HTMLElement>) => void;
+  years: number[];
+  inputYear: string;
+  setInputYear: (event: string) => void;
+  handleSearchYear: (field: string, input: string) => void;
 }
 
 export default function HomePanel({
@@ -19,12 +23,21 @@ export default function HomePanel({
   inputColor,
   setInputColor,
   handleSearchColor,
+  years,
+  inputYear,
+  setInputYear,
+  handleSearchYear,
 }: HomePanelProps) {
   const [openedFilter, setOpenedFilter] = useState(false);
 
   const handleFilterButton = () => {
     if (openedFilter) return setOpenedFilter(false);
     setOpenedFilter(true);
+  };
+
+  const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInputYear(e.target.value);
+    handleSearchYear('date', inputYear);
   };
 
   return (
@@ -46,7 +59,7 @@ export default function HomePanel({
 
       {openedFilter && (
         <div className='w-full my-4 center flex-col gap-6'>
-          <div className='center flex-row flex-wrap gap-6'>
+          <div className='center flex-col md:flex-row gap-4 md:gap-6'>
             <div className='filterBtnDiv'>
               <input
                 type='text'
@@ -74,13 +87,26 @@ export default function HomePanel({
             </div>
           </div>
 
-          <div className='center flex-wrap gap-6'>
-            <select>
-              <option value='ano' disabled>
-                ano
-              </option>
-              <option value='2024'> 2024</option>
-            </select>
+          <div className='center flex-col md:flex-row md:pt-4 gap-4 md:gap-6'>
+            <div className='relative'>
+              <label className='pointer-events-none select-none absolute left-2 -top-3 text-[11px] bg-opacity-80 bg-white p-1'>
+                selecione um ano
+              </label>
+              <select
+                className='bg-white border border-geraldine px-8 p-2 focus:border-2 focus:outline-0'
+                value={inputYear}
+                onChange={(e) => handleOption(e)}
+              >
+                <option value='all'>todos</option>
+                {years.map((year, index) => {
+                  return (
+                    <option key={index} value={year}>
+                      {year}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
 
             <input type='range' name='price' />
           </div>
