@@ -31,7 +31,7 @@ Check out the live demo
 
 Created by Jessica Bandeira.
 
-- LinkedIn: [Jessica's LinkedIn Profile](https://www.linkedin.com/in/jessica-santosb/)
+- LinkedIn: [Jessica's LinkedIn Profile](https://www.linkedin.com/in/jessicasantosb/)
 
 ## Known Issues and Future Improvements
 
