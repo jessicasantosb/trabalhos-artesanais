@@ -87,7 +87,6 @@ export default function HomePanel({
             </div>
           </div>
 
-          <div className='center flex-col md:flex-row md:pt-4 gap-4 md:gap-6'>
             <div className='relative'>
               <label className='pointer-events-none select-none absolute left-2 -top-3 text-[11px] bg-opacity-80 bg-white p-1'>
                 selecione um ano
@@ -107,9 +106,6 @@ export default function HomePanel({
                 })}
               </select>
             </div>
-
-            <input type='range' name='price' />
-          </div>
         </div>
       )}
     </section>
