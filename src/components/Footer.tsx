@@ -32,17 +32,17 @@ export default function Footer() {
         <ul>
           <li className='footerTitle'>SOBRE NÓS</li>
           <li>
-            <a href='#' target='_blank' rel='noopener noreferrer'>
+            <a href='#' rel='noopener noreferrer'>
               TERMO DE USO
             </a>
           </li>
           <li>
-            <a href='#' target='_blank' rel='noopener noreferrer'>
+            <a href='#' rel='noopener noreferrer'>
               PRIVACIDADE
             </a>
           </li>
           <li>
-            <a href='#' target='_blank' rel='noopener noreferrer'>
+            <a href='#' rel='noopener noreferrer'>
               COOKIES
             </a>
           </li>
