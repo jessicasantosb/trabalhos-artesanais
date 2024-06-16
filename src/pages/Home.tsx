@@ -26,7 +26,7 @@ interface ProjectProps {
   title: string;
   date: string;
   client: string;
-  price: string;
+  price: number;
 }
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
   const [inputYear, setInputYear] = useState('');
 
   const { user } = useContext(AuthContext);
-  let years: number[] = [];
+  const years: number[] = [];
 
   projects.forEach((project) => {
     const date = new Date(project.date);
@@ -45,10 +45,14 @@ export default function Home() {
       years.push(year);
     }
     years.sort();
+
+    console.log(typeof project.price);
+
   });
 
   useEffect(() => {
     loadProjects();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadProjects = () => {
@@ -56,7 +60,7 @@ export default function Home() {
     const queryRef = query(projectRef, where('uid', '==', user?.uid));
 
     getDocs(queryRef).then((snapshot) => {
-      let projectsList = [] as ProjectProps[];
+      const projectsList = [] as ProjectProps[];
 
       snapshot.forEach((doc) => {
         projectsList.push({
@@ -136,7 +140,7 @@ export default function Home() {
 
     const querySnapshot = await getDocs(q);
 
-    let projectsList = [] as ProjectProps[];
+    const projectsList = [] as ProjectProps[];
 
     querySnapshot.forEach((doc) => {
       projectsList.push({
@@ -188,7 +192,10 @@ export default function Home() {
                 title={project.title}
                 date={project.date}
                 client={project.client}
-                price={project.price}
+                price={project.price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                })}
                 handleDeleteProject={() => handleDeleteProject(project)}
               />
             );

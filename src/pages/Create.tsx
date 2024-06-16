@@ -8,6 +8,7 @@ import {
 } from 'firebase/storage';
 import { ChangeEvent, useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { GoTrash, GoUpload } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
@@ -15,7 +16,6 @@ import { z } from 'zod';
 import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
 import { db, storage } from '../services/firebaseConnection';
-import toast from 'react-hot-toast';
 
 interface ImageItemProps {
   uid: string;
@@ -28,7 +28,21 @@ const schema = z.object({
   title: z.string().nonempty('O título é obrigatório'),
   date: z.coerce.date(),
   client: z.string().nonempty('O nome do cliente é obrigatório'),
-  price: z.string().nonempty('O preço é obrigatório'),
+  price: z
+    .union([
+      z.string().transform((x) => {
+        const numStr = x
+          .replace(/\./g, '')
+          .replace(',', '.')
+          .replace(/[^0-9.-]+/g, '');
+        return parseFloat(numStr);
+      }),
+      z.number(),
+    ])
+    .pipe(z.coerce.number().min(0.0001).max(999999999))
+    .refine((val) => !isNaN(val), {
+      message: 'Insira um número decimal válido',
+    }),
   color: z.string().nonempty('A cor é obrigatória'),
   size: z.string().nonempty('O tamanho é obrigatório'),
   description: z.string(),
@@ -105,7 +119,7 @@ export default function Create() {
 
   const onSubmit = (data: FormData) => {
     if (projectImage.length === 0) {
-      alert('Envie ao menos uma imagem.');
+      toast.error('Envie ao menos uma imagem.');
       return;
     }
 
@@ -206,7 +220,7 @@ export default function Create() {
             register={register}
             error={errors.client?.message}
           />
-          <div className='flex flex-col justify-between sm:flex-row'>
+          <div className='flex flex-col justify-between sm:flex-row gap-4'>
             <Input
               name='date'
               type='text'
@@ -215,14 +229,16 @@ export default function Create() {
               register={register}
               error={errors.date?.message}
             />
-            <Input
-              name='price'
-              type='text'
-              label='Preço:'
-              defaultValue='R$ '
-              register={register}
-              error={errors.price?.message}
-            />
+            <div className='flex items-end'>
+              <p className='h-10 pt-3 pr-2 italic text-sm'>R$</p>
+              <Input
+                name='price'
+                type='string'
+                label='Preço:'
+                register={register}
+                error={errors.price?.message}
+              />
+            </div>
           </div>
           <Input
             name='color'

@@ -3,7 +3,6 @@ import { RegisterOptions, UseFormRegister } from 'react-hook-form';
 interface InputProps {
   label?: string;
   placeholder?: string;
-  defaultValue?: string;
   type: string;
   name: string;
   register: UseFormRegister<any>;
@@ -14,7 +13,6 @@ interface InputProps {
 export default function Input({
   label,
   placeholder,
-  defaultValue,
   type,
   name,
   register,
@@ -28,7 +26,6 @@ export default function Input({
         <input
           placeholder={placeholder}
           type={type}
-          defaultValue={defaultValue}
           {...register(name, rules)}
           id={name}
           className='w-full h-10 p-2 shadow rounded-sm'
