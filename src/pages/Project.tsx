@@ -56,7 +56,7 @@ export default function Project() {
 
   useEffect(() => {
     if (contentRef.current) {
-      const { width } = contentRef.current?.getBoundingClientRect();
+      const { width } = contentRef.current.getBoundingClientRect();
       setImagePosition(-(width * imageIsActive));
     }
   }, [imageIsActive]);
@@ -92,7 +92,7 @@ export default function Project() {
     };
 
     loadProject();
-  }, [id]);
+  }, [id, navigate]);
 
   return (
     <section className='container m-auto p-4'>
