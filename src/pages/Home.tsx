@@ -49,7 +49,7 @@ export default function Home() {
     console.log(typeof project.price);
 
   });
-
+  
   useEffect(() => {
     loadProjects();
   // eslint-disable-next-line react-hooks/exhaustive-deps
