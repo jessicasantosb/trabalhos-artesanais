@@ -9,6 +9,7 @@ import AuthProvider from './context/AuthContext';
 import Create from './pages/Create';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import Project from './pages/Project';
 import Register from './pages/Register';
 import Private from './routes/Private';
@@ -18,6 +19,7 @@ function App() {
     {
       path: '/',
       element: <Layout />,
+      errorElement: <NotFound />,
       children: [
         {
           index: true,
