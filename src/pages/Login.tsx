@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import image from '../assets/login-img.jpg';
 import Input from '../components/Input';
 import { auth } from '../services/firebaseConnection';
 
@@ -19,7 +20,7 @@ const schema = z.object({
 type formData = z.infer<typeof schema>;
 
 export default function Login() {
-  const [error, setError] = useState("")
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const {
@@ -53,38 +54,43 @@ export default function Login() {
   };
 
   return (
-    <section className='w-full pt-12 px-4 center flex-col'>
-      <h1 className='pb-4 font-medium text-4xl text-center'>Bem vindo!</h1>
+    <section className='authSection'>
+      <main className='authContainer'>
+        <img
+          src={image}
+          alt='crochet image'
+          className='authImg saturate-200 contrast-125'
+        />
+        <div className='authDiv'>
+          <h1 className='authTitle md:pt-14 md:before:top-[107px]'>
+            Bem vindo!
+          </h1>
+          <form className='authForm' onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              label='Email:'
+              type='email'
+              name='email'
+              error={errors.email?.message}
+              register={register}
+            />
 
-      <main className='bg-ligthblue my-8 p-4 w-full max-w-md'>
-        <form
-          className='flex flex-col m-auto'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Input
-            label='Email:'
-            type='email'
-            name='email'
-            error={errors.email?.message}
-            register={register}
-          />
+            <Input
+              label='Password:'
+              type='password'
+              name='password'
+              error={errors.password?.message}
+              register={register}
+            />
 
-          <Input
-            label='Password:'
-            type='password'
-            name='password'
-            error={errors.password?.message}
-            register={register}
-          />
+            {error && <p className='error'>{error}</p>}
+            <button className='authBtn'>Entrar</button>
+          </form>
 
-          {error && <p className='text-red pt-4'>{error}</p>}
-          <button className='button'>Entrar</button>
-        </form>
-
-        <p>Ainda não possui uma conta? </p>
-        <Link to={'/register'} className='underline hover:text-geraldine'>
-          Cadastrar
-        </Link>
+          <p>Ainda não possui image conta? </p>
+          <Link to={'/register'} className='authLink'>
+            Cadastrar
+          </Link>
+        </div>
       </main>
     </section>
   );

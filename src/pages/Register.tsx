@@ -6,12 +6,13 @@ import {
 } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+import image from '../assets/register-img.jpg';
 import Input from '../components/Input';
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../services/firebaseConnection';
-import toast from 'react-hot-toast';
 
 const schema = z
   .object({
@@ -36,7 +37,7 @@ const schema = z
 type formData = z.infer<typeof schema>;
 
 export default function Register() {
-  const [error, setError] = useState("")
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { handleUserInfo } = useContext(AuthContext);
 
@@ -66,69 +67,72 @@ export default function Register() {
           name: data.name,
           email: data.email,
         });
-        
+
         toast.success('Registrado com sucesso!');
         navigate('/login', { replace: true });
       })
       .catch((error) => {
         console.error(error);
-         if (error.code === 'auth/weak-password') {
-           setError('Senha fraca');
-         } else if (error.code === 'auth/email-already-in-use') {
-           setError('Este email já está em uso');
-         }
+        if (error.code === 'auth/weak-password') {
+          setError('Senha fraca');
+        } else if (error.code === 'auth/email-already-in-use') {
+          setError('Este email já está em uso');
+        }
       });
   };
 
   return (
-    <section className='w-full pt-12 px-4 center flex-col'>
-      <h1 className='pb-4 font-medium text-4xl text-center'>Cadastre-se!</h1>
+    <section className='authSection'>
+      <main className='authContainer'>
+        <img
+          src={image}
+          alt='crochet image'
+          className='authImg hue-rotate-180'
+        />
+        <div className='authDiv'>
+          <h1 className='authTitle'>Cadastre-se!</h1>
+          <form className='authForm' onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              label='Nome:'
+              type='text'
+              name='name'
+              error={errors.name?.message}
+              register={register}
+            />
 
-      <main className='bg-ligthblue my-8 p-4 w-full max-w-md'>
-        <form
-          className='flex flex-col m-auto'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Input
-            label='Nome:'
-            type='text'
-            name='name'
-            error={errors.name?.message}
-            register={register}
-          />
+            <Input
+              label='Email:'
+              type='email'
+              name='email'
+              error={errors.email?.message}
+              register={register}
+            />
 
-          <Input
-            label='Email:'
-            type='email'
-            name='email'
-            error={errors.email?.message}
-            register={register}
-          />
+            <Input
+              label='Senha:'
+              type='password'
+              name='password'
+              error={errors.password?.message}
+              register={register}
+            />
 
-          <Input
-            label='Senha:'
-            type='password'
-            name='password'
-            error={errors.password?.message}
-            register={register}
-          />
+            <Input
+              label='Confirme a senha:'
+              type='password'
+              name='confirmPassword'
+              error={errors.confirmPassword?.message}
+              register={register}
+            />
 
-          <Input
-            label='Confirme a senha:'
-            type='password'
-            name='confirmPassword'
-            error={errors.confirmPassword?.message}
-            register={register}
-          />
+            {error && <p className='error'>{error}</p>}
+            <button className='authBtn'>Cadastrar</button>
+          </form>
 
-          {error && <p className='text-red pt-4'>{error}</p>}
-          <button className='button'>Cadastrar</button>
-        </form>
-
-        <p>Já possui uma conta? </p>
-        <Link to={'/login'} className='underline hover:text-geraldine'>
-          Entrar
-        </Link>
+          <p>Já possui uma conta? </p>
+          <Link to={'/login'} className='authLink'>
+            Entrar
+          </Link>
+        </div>
       </main>
     </section>
   );

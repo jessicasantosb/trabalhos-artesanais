@@ -9,13 +9,37 @@
   .center {
     @apply flex items-center justify-center;
   }
+  .error {
+    @apply text-red pt-4
+  }
   /* header */
   .headerBtn {
     @apply center gap-2 w-28 h-10 border bg-opacity-80 shadow-md hover:shadow-none hover:bg-opacity-70 hover:scale-95 transition-all
   }
   /* login/register */
-  .button {
-    @apply w-full h-10 bg-blue my-6 uppercase font-bold rounded-lg hover:bg-geraldine;
+  .authSection {
+    @apply w-full py-12 px-4 center
+  }
+  .authContainer {
+    @apply min-h-96 min-w-64 grid md:grid-cols-2
+  }
+  .authImg {
+    @apply max-w-96 h-full hidden md:block
+  }
+  .authDiv {
+    @apply relative sm:min-w-96 bg-ligthblue p-4
+  }
+  .authTitle {
+    @apply py-4 font-medium text-4xl text-center before:absolute before:top-[67px] before:right-24 before:h-2 before:w-12 before:bg-geraldine before:bg-opacity-50
+  }
+  .authForm {
+    @apply flex flex-col
+  }
+  .authBtn {
+    @apply w-full h-10 my-6 uppercase font-bold rounded-lg border shadow-sm  bg-geraldine border-geraldine hover:bg-opacity-60 hover:scale-95 hover:shadow-none;
+  }
+  .authLink {
+    @apply underline opacity-95 hover:opacity-70
   }
   /* home panel */
   .filterBtnDiv {
