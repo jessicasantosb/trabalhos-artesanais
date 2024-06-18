@@ -45,14 +45,10 @@ export default function Home() {
       years.push(year);
     }
     years.sort();
-
-    console.log(typeof project.price);
-
   });
   
   useEffect(() => {
     loadProjects();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadProjects = () => {

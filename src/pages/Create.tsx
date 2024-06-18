@@ -125,10 +125,6 @@ export default function Create() {
       return;
     }
 
-    // const dateFormated = data.date.toLocaleDateString('pt-BR');
-
-    console.log(data.date);
-
     const projectImagesList = projectImage.map((item) => {
       return {
         uid: item.uid,
