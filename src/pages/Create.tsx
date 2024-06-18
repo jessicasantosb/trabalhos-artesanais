@@ -26,7 +26,9 @@ interface ImageItemProps {
 
 const schema = z.object({
   title: z.string().nonempty('O título é obrigatório'),
-  date: z.coerce.date(),
+  date: z
+    .string()
+    .regex(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/[12][0-9]{3}$/),
   client: z.string().nonempty('O nome do cliente é obrigatório'),
   price: z
     .union([
@@ -123,7 +125,9 @@ export default function Create() {
       return;
     }
 
-    const dateFormated = data.date.toLocaleDateString('pt-BR');
+    // const dateFormated = data.date.toLocaleDateString('pt-BR');
+
+    console.log(data.date);
 
     const projectImagesList = projectImage.map((item) => {
       return {
@@ -135,7 +139,7 @@ export default function Create() {
 
     addDoc(collection(db, 'trabalhos'), {
       title: data.title.toUpperCase(),
-      date: dateFormated,
+      date: data.date,
       client: data.client,
       price: data.price,
       color: data.color.toUpperCase(),
@@ -225,7 +229,7 @@ export default function Create() {
               name='date'
               type='text'
               label='Data:'
-              placeholder='ex: 00/00/0000'
+              placeholder='ex: DD/MM/AAAA'
               register={register}
               error={errors.date?.message}
             />
@@ -235,6 +239,7 @@ export default function Create() {
                 name='price'
                 type='string'
                 label='Preço:'
+                placeholder='50,99'
                 register={register}
                 error={errors.price?.message}
               />
