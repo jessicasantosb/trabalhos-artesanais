@@ -6,6 +6,14 @@ O Trabalhos Artesanais é um projeto com o objetivo de facilitar a administraç�
 [English]
 Trabalhos Artesanais is a project to facilitate sales management that works like an online notebook. Users can intuitively enter their works with the relevant information, allowing for more efficient control and record-keeping.
 
+## Getting Started
+Para começar no Booking Room API, siga estes passos:
+
+1. Clonar o repositório: **`git clone https://github.com/jessicasantosb/trabalhos-artesanais.git`**
+2. Entrar na pasta do projeto: **`cd trabalhos-artesanais`**
+3. Instalar as dependências: **`yarn`**
+4. Iniciar o aplicativo: **`yarn dev`**
+
 ## Live Demo
 
 [Português]
@@ -18,7 +26,7 @@ Check out the live demo
 
 ## Screenshot
 
-![Home Page]()
+![Home Page](src/assets/screenshot.png)
 
 ## Technology Stack
 
