@@ -25,28 +25,36 @@ interface ImageItemProps {
 }
 
 const schema = z.object({
-  title: z.string().nonempty('O título é obrigatório'),
+  title: z.string().min(1, { message: 'O título é obrigatório' }),
   date: z
     .string()
-    .regex(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/[12][0-9]{3}$/),
-  client: z.string().nonempty('O nome do cliente é obrigatório'),
+    .min(1, { message: 'A data é obrigatória' })
+    .regex(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/[12][0-9]{3}$/, {
+      message: 'Insira uma data válida',
+    }),
+  client: z.string().min(1, { message: 'O nome do cliente é obrigatório' }),
   price: z
     .union([
-      z.string().transform((x) => {
-        const numStr = x
-          .replace(/\./g, '')
-          .replace(',', '.')
-          .replace(/[^0-9.-]+/g, '');
-        return parseFloat(numStr);
-      }),
+      z
+        .string()
+        .min(1, { message: 'O preço é obrigatório' })
+        .transform((x) => {
+          const numStr = x
+            .replace(/\./g, '')
+            .replace(',', '.')
+            .replace(/[^0-9.-]+/g, '');
+          return parseFloat(numStr);
+        }),
       z.number(),
     ])
-    .pipe(z.coerce.number().min(0.0001).max(999999999))
-    .refine((val) => !isNaN(val), {
-      message: 'Insira um número decimal válido',
-    }),
-  color: z.string().nonempty('A cor é obrigatória'),
-  size: z.string().nonempty('O tamanho é obrigatório'),
+    .pipe(
+      z.coerce
+        .number({ invalid_type_error: 'Insira um número válido' })
+        .min(0.0001)
+        .max(999999999)
+    ),
+  color: z.string().min(1, { message: 'A cor é obrigatória' }),
+  size: z.string().min(1, { message: 'O tamanho é obrigatório' }),
   description: z.string(),
 });
 
@@ -229,17 +237,14 @@ export default function Create() {
               register={register}
               error={errors.date?.message}
             />
-            <div className='flex items-end'>
-              <p className='h-10 pt-3 pr-2 italic text-sm'>R$</p>
-              <Input
-                name='price'
-                type='string'
-                label='Preço:'
-                placeholder='50,99'
-                register={register}
-                error={errors.price?.message}
-              />
-            </div>
+            <Input
+              name='price'
+              type='string'
+              label='Preço:'
+              placeholder='R$ 50,99'
+              register={register}
+              error={errors.price?.message}
+            />
           </div>
           <Input
             name='color'
