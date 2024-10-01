@@ -52,7 +52,7 @@ export function HomeCard({
           />
         </div>
 
-        <Link to={`project/${id}`}>
+        <Link to={`projeto/${id}`}>
           <div>
             <h4 className='h-14 p-2 font-bold tracking-tight break-words line-clamp-2'>
               {title}
