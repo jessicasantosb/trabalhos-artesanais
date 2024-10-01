@@ -4,14 +4,15 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+
 import image from '../assets/register-img.jpg';
 import Input from '../components/Input';
-import { AuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { auth } from '../services/firebaseConnection';
 
 const schema = z
@@ -39,7 +40,7 @@ type formData = z.infer<typeof schema>;
 export default function Register() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { handleUserInfo } = useContext(AuthContext);
+  const { handleUserInfo } = useAuthContext();
 
   const {
     register,

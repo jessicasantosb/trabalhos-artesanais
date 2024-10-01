@@ -7,11 +7,12 @@ import {
   where,
 } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+
 import HomeCard from '../components/HomeCard';
 import HomePanel from '../components/HomePanel';
-import { AuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { db, storage } from '../services/firebaseConnection';
 
 interface ImagesProps {
@@ -34,8 +35,8 @@ export default function Home() {
   const [inputTitle, setInputTitle] = useState('');
   const [inputColor, setInputColor] = useState('');
   const [inputYear, setInputYear] = useState('');
+  const { user } = useAuthContext();
 
-  const { user } = useContext(AuthContext);
   const years: number[] = [];
 
   projects.forEach((project) => {
@@ -46,7 +47,7 @@ export default function Home() {
     }
     years.sort();
   });
-  
+
   useEffect(() => {
     loadProjects();
   }, []);

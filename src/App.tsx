@@ -4,7 +4,7 @@ import './App.css';
 
 import Layout from './components/Layout';
 
-import AuthProvider from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 
 import Create from './pages/Create';
 import Home from './pages/Home';

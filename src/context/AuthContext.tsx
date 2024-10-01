@@ -1,5 +1,10 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { ReactNode, createContext, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 import { auth } from '../services/firebaseConnection';
 
 interface AuthProviderProps {
@@ -21,7 +26,7 @@ type AuthContextData = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-function AuthProvider({ children }: AuthProviderProps) {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserProps | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
 
@@ -58,5 +63,3 @@ function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   );
 }
-
-export default AuthProvider;

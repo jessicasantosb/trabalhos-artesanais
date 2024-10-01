@@ -1,15 +1,15 @@
 import { signOut } from 'firebase/auth';
-import { useContext, useState } from 'react';
-import { MdLogout, MdClose } from 'react-icons/md';
+import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdClose, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { AuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { auth } from '../services/firebaseConnection';
 
 export default function Header() {
-  const { isSigned, loadingAuth, user } = useContext(AuthContext);
   const [isDropdown, setIsDropdown] = useState(false);
+  const { isSigned, loadingAuth, user } = useAuthContext();
 
   const handleDropdown = () => {
     setIsDropdown(!isDropdown);
@@ -35,8 +35,12 @@ export default function Header() {
                   {user?.name}!
                 </span>
               </p>
-              <Link to={"/create"} className='headerBtn bg-geraldine hover:text-black'>
-              Novo</Link>
+              <Link
+                to={'/create'}
+                className='headerBtn bg-geraldine hover:text-black'
+              >
+                Novo
+              </Link>
 
               <button
                 onClick={() => signOut(auth)}
@@ -48,7 +52,11 @@ export default function Header() {
             </div>
 
             <button onClick={handleDropdown} className='md:hidden'>
-              {isDropdown ? <MdClose size={20} /> : <GiHamburgerMenu size={20} />}
+              {isDropdown ? (
+                <MdClose size={20} />
+              ) : (
+                <GiHamburgerMenu size={20} />
+              )}
             </button>
           </div>
         )}

@@ -6,7 +6,7 @@ import {
   ref,
   uploadBytes,
 } from 'firebase/storage';
-import { ChangeEvent, useContext, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { GoTrash, GoUpload } from 'react-icons/go';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 import Input from '../components/Input';
-import { AuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 import { db, storage } from '../services/firebaseConnection';
 
 interface ImageItemProps {
@@ -62,7 +62,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function Create() {
   const [projectImage, setProjectImage] = useState<ImageItemProps[]>([]);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuthContext();
   const {
     register,
     handleSubmit,
