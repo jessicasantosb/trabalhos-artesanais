@@ -10,6 +10,7 @@ import {
 import { MdDateRange, MdPhotoSizeSelectLarge } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { Head } from '../components';
 import { db } from '../services';
 
 interface ImagesProps {
@@ -97,6 +98,8 @@ export function Project() {
 
   return (
     <section className='container m-auto p-4'>
+      {project && <Head title={project.title} description='' />}
+
       <div className='relative my-10'>
         <h1 className='text-3xl before:w-6 before:h-6 before:absolute before:-bottom-3 before:-left-3 before:bg-geraldine before:-z-10'>
           {project?.title}

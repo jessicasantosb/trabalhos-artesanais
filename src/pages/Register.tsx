@@ -11,7 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import image from '../assets/register-img.jpg';
-import { Input } from '../components';
+import { Head, Input } from '../components';
 import { useAuthContext } from '../hooks';
 import { auth } from '../services';
 
@@ -84,6 +84,11 @@ export function Register() {
 
   return (
     <section className='authSection'>
+      <Head
+        title='Cadastrar'
+        description='Registre-se agora!'
+      />
+
       <main className='authContainer'>
         <img
           src={image}

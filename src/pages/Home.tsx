@@ -10,7 +10,7 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-import { HomeCard, HomePanel } from '../components';
+import { Head, HomeCard, HomePanel } from '../components';
 import { useAuthContext } from '../hooks';
 import { db, storage } from '../services';
 
@@ -181,6 +181,8 @@ export function Home() {
 
   return (
     <section className='min-h-screen container m-auto p-4'>
+      <Head title='Início' description='Experimente agora!' />
+
       <div className='relative pt-10 select-none'>
         <h1 className='text-3xl font-bold pb-2 sm:text-5xl before:absolute before:bottom-2 before:-left-2 before:h-4 before:w-4 sm:before:bottom-1 sm:before:-left-4 sm:before:h-6 sm:before:w-6 before:bg-blue before:-z-10'>
           Seus Trabalhos

@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import image from '../assets/login-img.jpg';
-import { Input } from '../components';
+import { Head, Input } from '../components';
 import { auth } from '../services';
 
 const schema = z.object({
@@ -56,6 +56,11 @@ export function Login() {
 
   return (
     <section className='authSection'>
+      <Head
+        title='Entrar'
+        description='Entre agora!'
+      />
+
       <main className='authContainer'>
         <img
           src={image}

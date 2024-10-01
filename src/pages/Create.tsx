@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 
-import { Input } from '../components';
+import { Head, Input } from '../components';
 import { useAuthContext } from '../hooks';
 import { db, storage } from '../services';
 
@@ -168,6 +168,11 @@ export function Create() {
 
   return (
     <section className='container m-auto p-4 center flex-col'>
+      <Head
+        title='Criar'
+        description='Registre os dados do seu novo trabalho!'
+      />
+
       <h1 className='pt-14 pb-2 font-medium text-4xl'>Novo Cadastro</h1>
       <p className='pb-14'>
         adicione nos campos abaixo os dados do seu novo trabalho e não se
