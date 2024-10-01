@@ -189,8 +189,7 @@ export function Home() {
         </h1>
       </div>
       <p className='pb-4 text-base sm:text-lg select-none'>
-        Registre e Gerencie Suas
-        <span className='font-bold'>Criações</span> e{' '}
+        Registre e Gerencie Suas <span className='font-bold'>Criações</span> e{' '}
         <span className='text-blue font-bold'>Vendas</span>
       </p>
 
