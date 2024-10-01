@@ -4,7 +4,15 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import { Layout } from './components';
 import { AuthProvider } from './context';
-import { Create, Home, Login, NotFound, Project, Register } from './pages';
+import {
+  Chart,
+  Create,
+  Home,
+  Login,
+  NotFound,
+  Project,
+  Register,
+} from './pages';
 import { Private } from './routes';
 
 function App() {
@@ -23,7 +31,7 @@ function App() {
           ),
         },
         {
-          path: 'create',
+          path: 'criar',
           element: (
             <Private>
               <Create />
@@ -31,7 +39,7 @@ function App() {
           ),
         },
         {
-          path: 'project/:id',
+          path: 'projeto/:id',
           element: (
             <Private>
               <Project />
@@ -39,11 +47,19 @@ function App() {
           ),
         },
         {
-          path: 'login',
+          path: 'grafico',
+          element: (
+            <Private>
+              <Chart />
+            </Private>
+          ),
+        },
+        {
+          path: 'entrar',
           element: <Login />,
         },
         {
-          path: 'register',
+          path: 'cadastrar',
           element: <Register />,
         },
       ],
