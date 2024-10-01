@@ -10,10 +10,9 @@ import { deleteObject, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-import HomeCard from '../components/HomeCard';
-import HomePanel from '../components/HomePanel';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { db, storage } from '../services/firebaseConnection';
+import { HomeCard, HomePanel } from '../components';
+import { useAuthContext } from '../hooks';
+import { db, storage } from '../services';
 
 interface ImagesProps {
   name: string;
@@ -30,7 +29,7 @@ interface ProjectProps {
   price: number;
 }
 
-export default function Home() {
+export function Home() {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
   const [inputTitle, setInputTitle] = useState('');
   const [inputColor, setInputColor] = useState('');

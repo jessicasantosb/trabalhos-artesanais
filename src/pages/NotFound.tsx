@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function NotFound() {
+export function NotFound() {
   return (
     <section className='container m-auto center min-h-screen'>
       <div className='p-4 center flex-col'>

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+
 import logo from '../assets/logo.png';
 
-export default function Footer() {
+export function Footer() {
   return (
     <footer className='container mx-auto mt-8 py-9 px-4 sm:px-8 md:px-24 center flex-col bg-black bg-opacity-5 shadow-sm'>
       <div className='w-full flex justify-between flex-col sm:flex-row gap-4 py-9'>

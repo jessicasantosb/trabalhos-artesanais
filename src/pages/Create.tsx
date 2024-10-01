@@ -13,9 +13,10 @@ import { GoTrash, GoUpload } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
-import Input from '../components/Input';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { db, storage } from '../services/firebaseConnection';
+
+import { Input } from '../components';
+import { useAuthContext } from '../hooks';
+import { db, storage } from '../services';
 
 interface ImageItemProps {
   uid: string;
@@ -60,7 +61,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function Create() {
+export function Create() {
   const [projectImage, setProjectImage] = useState<ImageItemProps[]>([]);
   const { user } = useAuthContext();
   const {

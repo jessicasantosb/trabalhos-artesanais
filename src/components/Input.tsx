@@ -10,7 +10,7 @@ interface InputProps {
   rules?: RegisterOptions;
 }
 
-export default function Input({
+export function Input({
   label,
   placeholder,
   type,

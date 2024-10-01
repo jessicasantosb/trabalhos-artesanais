@@ -5,7 +5,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { auth } from '../services/firebaseConnection';
+
+import { auth } from '../services';
 
 interface AuthProviderProps {
   children: ReactNode;

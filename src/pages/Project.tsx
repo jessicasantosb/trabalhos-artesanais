@@ -9,7 +9,8 @@ import {
 } from 'react-icons/io';
 import { MdDateRange, MdPhotoSizeSelectLarge } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
-import { db } from '../services/firebaseConnection';
+
+import { db } from '../services';
 
 interface ImagesProps {
   name: string;
@@ -32,7 +33,7 @@ interface ProjectProps {
   uid: string;
 }
 
-export default function Project() {
+export function Project() {
   const [project, setProject] = useState<ProjectProps>();
   const [skeleton, setSkeleton] = useState<boolean>(true);
   const [imageIsActive, setImageIsActive] = useState<number>(0);

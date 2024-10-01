@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdClose, MdLogout } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { auth } from '../services/firebaseConnection';
 
-export default function Header() {
+import logo from '../assets/logo.png';
+import { useAuthContext } from '../hooks';
+import { auth } from '../services';
+
+export function Header() {
   const [isDropdown, setIsDropdown] = useState(false);
   const { isSigned, loadingAuth, user } = useAuthContext();
 

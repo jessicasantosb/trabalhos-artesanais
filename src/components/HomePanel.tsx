@@ -16,7 +16,7 @@ interface HomePanelProps {
   handleSearchYear: (field: string, input: string) => void;
 }
 
-export default function HomePanel({
+export function HomePanel({
   inputTitle,
   setInputTitle,
   handleSearchTitle,

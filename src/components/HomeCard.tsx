@@ -13,7 +13,7 @@ interface CardProps {
   handleDeleteProject: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-export default function HomeCard({
+export function HomeCard({
   id,
   image,
   title,

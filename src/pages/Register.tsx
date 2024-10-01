@@ -11,9 +11,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import image from '../assets/register-img.jpg';
-import Input from '../components/Input';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { auth } from '../services/firebaseConnection';
+import { Input } from '../components';
+import { useAuthContext } from '../hooks';
+import { auth } from '../services';
 
 const schema = z
   .object({
@@ -37,7 +37,7 @@ const schema = z
 
 type formData = z.infer<typeof schema>;
 
-export default function Register() {
+export function Register() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { handleUserInfo } = useAuthContext();

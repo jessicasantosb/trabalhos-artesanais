@@ -1,13 +1,14 @@
 import { ReactNode } from 'react';
 import { ImSpinner } from 'react-icons/im';
 import { Navigate } from 'react-router-dom';
-import { useAuthContext } from '../hooks/useAuthContext';
+
+import { useAuthContext } from '../hooks';
 
 interface PrivateProps {
   children: ReactNode;
 }
 
-export default function Private({ children }: PrivateProps): any {
+export function Private({ children }: PrivateProps): any {
   const { isSigned, loadingAuth } = useAuthContext();
 
   if (loadingAuth) {

@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
+
 import image from '../assets/login-img.jpg';
-import Input from '../components/Input';
-import { auth } from '../services/firebaseConnection';
+import { Input } from '../components';
+import { auth } from '../services';
 
 const schema = z.object({
   email: z
@@ -19,7 +20,7 @@ const schema = z.object({
 
 type formData = z.infer<typeof schema>;
 
-export default function Login() {
+export function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
