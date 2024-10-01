@@ -20,7 +20,7 @@ export function Private({ children }: PrivateProps): any {
   }
 
   if (!isSigned) {
-    return <Navigate to={'/login'} />;
+    return <Navigate to={'/entrar'} />;
   }
   return children;
 }

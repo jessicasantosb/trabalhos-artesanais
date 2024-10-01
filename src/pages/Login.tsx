@@ -93,7 +93,7 @@ export function Login() {
           </form>
 
           <p>Ainda não possui image conta? </p>
-          <Link to={'/register'} className='authLink'>
+          <Link to={'/cadastrar'} className='authLink'>
             Cadastrar
           </Link>
         </div>

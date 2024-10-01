@@ -70,7 +70,7 @@ export function Register() {
         });
 
         toast.success('Registrado com sucesso!');
-        navigate('/login', { replace: true });
+        navigate('/entrar', { replace: true });
       })
       .catch((error) => {
         console.error(error);
@@ -135,7 +135,7 @@ export function Register() {
           </form>
 
           <p>Já possui uma conta? </p>
-          <Link to={'/login'} className='authLink'>
+          <Link to={'/entrar'} className='authLink'>
             Entrar
           </Link>
         </div>

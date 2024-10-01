@@ -37,10 +37,16 @@ export function Header() {
                 </span>
               </p>
               <Link
-                to={'/create'}
+                to={'/criar'}
                 className='headerBtn bg-geraldine hover:text-black'
               >
                 Novo
+              </Link>
+              <Link
+                to={'/grafico'}
+                className='headerBtn bg-blue hover:text-black'
+              >
+                Gráfico
               </Link>
 
               <button
