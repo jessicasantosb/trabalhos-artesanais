@@ -13,30 +13,13 @@ import toast from 'react-hot-toast';
 import { Head, HomeCard, HomePanel } from '../components';
 import { useAuthContext } from '../hooks';
 import { db, storage } from '../services';
-
-interface ImagesProps {
-  name: string;
-  uid: string;
-  url: string;
-}
-
-interface ProjectProps {
-  id: string;
-  images: ImagesProps[];
-  title: string;
-  date: string;
-  client: string;
-  price: number;
-}
+import { ProjectProps } from '../types';
 
 export function Home() {
-  const [projects, setProjects] = useState<ProjectProps[]>([]);
-  const [projectsDuplicated, setProjectsDuplicated] = useState<ProjectProps[]>(
-    []
-  );
   const [inputTitle, setInputTitle] = useState('');
   const [inputColor, setInputColor] = useState('');
-  const { user } = useAuthContext();
+  const { user, projects, setProjects, projectsDuplicated, loadProjects } =
+    useAuthContext();
 
   const years: number[] = [];
   projectsDuplicated.forEach((project) => {
@@ -51,29 +34,6 @@ export function Home() {
   useEffect(() => {
     loadProjects();
   }, []);
-
-  const loadProjects = () => {
-    const projectRef = collection(db, 'trabalhos');
-    const queryRef = query(projectRef, where('uid', '==', user?.uid));
-
-    getDocs(queryRef).then((snapshot) => {
-      const projectsList = [] as ProjectProps[];
-
-      snapshot.forEach((doc) => {
-        projectsList.push({
-          id: doc.id,
-          images: doc.data().images,
-          title: doc.data().title,
-          date: doc.data().date,
-          client: doc.data().client,
-          price: doc.data().price,
-        });
-      });
-
-      setProjects(projectsList);
-      setProjectsDuplicated(projectsList);
-    });
-  };
 
   const handleDeleteProject = async (project: ProjectProps) => {
     const projectItem = project;
@@ -153,7 +113,7 @@ export function Home() {
       if (year === projectYear) {
         yearField = project.date;
       }
-    });    
+    });
 
     const q = query(
       collection(db, 'trabalhos'),
