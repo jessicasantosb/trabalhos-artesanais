@@ -31,14 +31,15 @@ interface ProjectProps {
 
 export function Home() {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
+  const [projectsDuplicated, setProjectsDuplicated] = useState<ProjectProps[]>(
+    []
+  );
   const [inputTitle, setInputTitle] = useState('');
   const [inputColor, setInputColor] = useState('');
-  const [inputYear, setInputYear] = useState('');
   const { user } = useAuthContext();
 
   const years: number[] = [];
-
-  projects.forEach((project) => {
+  projectsDuplicated.forEach((project) => {
     const date = new Date(project.date);
     const year = date.getFullYear();
     if (!years.includes(year)) {
@@ -70,6 +71,7 @@ export function Home() {
       });
 
       setProjects(projectsList);
+      setProjectsDuplicated(projectsList);
     });
   };
 
@@ -109,30 +111,55 @@ export function Home() {
 
     setProjects([]);
 
-    let q;
+    const q = query(
+      collection(db, 'trabalhos'),
+      where('uid', '==', user?.uid),
+      where(field, '>=', input.toUpperCase()),
+      where(field, '<=', input.toUpperCase() + '\uf8ff')
+    );
 
-    if (field === 'date') {
-      projects.forEach((project) => {
-        const date = new Date(project.date);
-        const year = date.getFullYear();
-        if (input === year.toString()) {
-          input = project.date;
-        }
+    const querySnapshot = await getDocs(q);
+
+    const projectsList = [] as ProjectProps[];
+
+    querySnapshot.forEach((doc) => {
+      projectsList.push({
+        id: doc.id,
+        images: doc.data().images,
+        title: doc.data().title,
+        date: doc.data().date,
+        client: doc.data().client,
+        price: doc.data().price,
       });
+    });
 
-      q = query(
-        collection(db, 'trabalhos'),
-        where('uid', '==', user?.uid),
-        where(field, '==', input)
-      );
-    } else {
-      q = query(
-        collection(db, 'trabalhos'),
-        where('uid', '==', user?.uid),
-        where(field, '>=', input.toUpperCase()),
-        where(field, '<=', input.toUpperCase() + '\uf8ff')
-      );
+    setProjects(projectsList);
+  };
+
+  const handleSearchYear = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const year = e.target.value;
+
+    if (year === '' || year === 'all') {
+      loadProjects();
+      return;
     }
+
+    setProjects([]);
+    let yearField;
+
+    projectsDuplicated.forEach((project) => {
+      const projectYear = new Date(project.date).getFullYear().toString();
+
+      if (year === projectYear) {
+        yearField = project.date;
+      }
+    });    
+
+    const q = query(
+      collection(db, 'trabalhos'),
+      where('uid', '==', user?.uid),
+      where('date', '==', yearField)
+    );
 
     const querySnapshot = await getDocs(q);
 
@@ -160,7 +187,8 @@ export function Home() {
         </h1>
       </div>
       <p className='pb-4 text-base sm:text-lg select-none'>
-        Registre e Gerencie Suas <span className='font-bold'>Criações</span> e{' '}
+        Registre e Gerencie Suas
+        <span className='font-bold'>Criações</span> e{' '}
         <span className='text-blue font-bold'>Vendas</span>
       </p>
 
@@ -172,9 +200,7 @@ export function Home() {
         setInputColor={setInputColor}
         handleSearchColor={() => handleSearch('color', inputColor)}
         years={years}
-        inputYear={inputYear}
-        setInputYear={setInputYear}
-        handleSearchYear={handleSearch}
+        handleSearchYear={handleSearchYear}
       />
 
       {projects.length ? (

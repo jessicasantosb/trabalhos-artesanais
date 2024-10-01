@@ -11,9 +11,7 @@ interface HomePanelProps {
   setInputColor: (event: string) => void;
   handleSearchColor: (event: React.MouseEvent<HTMLElement>) => void;
   years: number[];
-  inputYear: string;
-  setInputYear: (event: string) => void;
-  handleSearchYear: (field: string, input: string) => void;
+  handleSearchYear: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export function HomePanel({
@@ -24,8 +22,6 @@ export function HomePanel({
   setInputColor,
   handleSearchColor,
   years,
-  inputYear,
-  setInputYear,
   handleSearchYear,
 }: HomePanelProps) {
   const [openedFilter, setOpenedFilter] = useState(false);
@@ -33,11 +29,6 @@ export function HomePanel({
   const handleFilterButton = () => {
     if (openedFilter) return setOpenedFilter(false);
     setOpenedFilter(true);
-  };
-
-  const handleOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setInputYear(e.target.value);
-    handleSearchYear('date', inputYear);
   };
 
   return (
@@ -87,25 +78,24 @@ export function HomePanel({
             </div>
           </div>
 
-            <div className='relative'>
-              <label className='pointer-events-none select-none absolute left-2 -top-3 text-[11px] bg-opacity-80 bg-white p-1'>
-                selecione um ano
-              </label>
-              <select
-                className='bg-white border border-geraldine px-8 p-2 focus:border-2 focus:outline-0'
-                value={inputYear}
-                onChange={(e) => handleOption(e)}
-              >
-                <option value='all'>todos</option>
-                {years.map((year, index) => {
-                  return (
-                    <option key={index} value={year}>
-                      {year}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+          <div className='relative'>
+            <label className='pointer-events-none select-none absolute left-2 -top-3 text-[11px] bg-opacity-80 bg-white p-1'>
+              selecione um ano
+            </label>
+            <select
+              className='bg-white border border-geraldine px-8 p-2 focus:border-2 focus:outline-0'
+              onChange={(e) => handleSearchYear(e)}
+            >
+              <option value='all'>todos</option>
+              {years.map((year, index) => {
+                return (
+                  <option key={index} value={year}>
+                    {year}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
       )}
     </section>
