@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { VictoryBar, VictoryChart } from 'victory';
+import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
 import { Head } from '../components';
 import { useAuthContext } from '../hooks';
 
@@ -15,7 +15,10 @@ export function Chart() {
     const graphData: any = projects.map((item) => {
       return {
         x: item.client,
-        y: Number(item.price),
+        y: item.price.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }),
       };
     });
 
@@ -40,16 +43,12 @@ export function Chart() {
           domainPadding={20}
           animate={{ duration: 2000, easing: 'bounce' }}
         >
+          <VictoryAxis dependentAxis />
           <VictoryBar
             horizontal
             style={{ data: { fill: '#FF8F94' } }}
             data={graph}
-            labels={({ datum }) =>
-              datum.y.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })
-            }
+            labels={({ datum }) => datum.x}
           ></VictoryBar>
         </VictoryChart>
       </div>
