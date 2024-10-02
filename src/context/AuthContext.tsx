@@ -1,6 +1,13 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import { auth, db } from '../services';
 import { ProjectProps } from '../types';
