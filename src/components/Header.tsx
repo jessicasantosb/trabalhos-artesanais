@@ -16,6 +16,11 @@ export function Header() {
     setIsDropdown(!isDropdown);
   };
 
+  const handleSignOut = () => {
+    signOut(auth);
+    setIsDropdown(!isDropdown);
+  };
+
   return (
     <header className='w-full shadow-lg'>
       <nav className='container m-auto px-4 h-[60px] center justify-between'>
@@ -37,12 +42,14 @@ export function Header() {
                 </span>
               </p>
               <Link
+                onClick={handleDropdown}
                 to={'/criar'}
                 className='headerBtn bg-geraldine hover:text-black'
               >
                 Novo
               </Link>
               <Link
+                onClick={handleDropdown}
                 to={'/grafico'}
                 className='headerBtn bg-blue hover:text-black'
               >
@@ -50,7 +57,7 @@ export function Header() {
               </Link>
 
               <button
-                onClick={() => signOut(auth)}
+                onClick={handleSignOut}
                 className='headerBtn border-black text-black'
               >
                 Sair
