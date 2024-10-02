@@ -34,9 +34,12 @@ const schema = z.object({
     .string()
     .min(1, { message: 'A data é obrigatória' })
     .regex(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/[12][0-9]{3}$/, {
-      message: 'Insira uma data válida',
+      message: 'Insira uma data válida DD/MM/AAAA',
     }),
-  client: z.string().min(1, { message: 'O nome do cliente é obrigatório' }),
+  client: z
+    .string()
+    .min(1, { message: 'O nome do cliente é obrigatório' })
+    .max(30, { message: 'O nome do cliente pode ter no máximo 30 caracteres' }),
   price: z
     .union([
       z
@@ -55,11 +58,19 @@ const schema = z.object({
       z.coerce
         .number({ invalid_type_error: 'Insira um número válido' })
         .min(0.0001)
-        .max(999999999)
+        .max(99999999, { message: 'Valor inválido' })
     ),
-  color: z.string().min(1, { message: 'A cor é obrigatória' }),
-  size: z.string().min(1, { message: 'O tamanho é obrigatório' }),
-  description: z.string(),
+  color: z
+    .string()
+    .min(1, { message: 'A cor é obrigatória' })
+    .max(30, { message: 'A cor pode ter no máximo 30 caracteres' }),
+  size: z
+    .string()
+    .min(1, { message: 'O tamanho é obrigatório' })
+    .max(30, { message: 'O tamanho pode ter no máximo 30 caracteres' }),
+  description: z
+    .string()
+    .max(300, { message: 'A descrição pode ter no máximo 300 caracteres' }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -279,6 +290,9 @@ export function Create() {
               {...register('description')}
               name='description'
             />
+            <p className='my-1 text-red text-sm'>
+              {errors.description?.message}
+            </p>
           </label>
           <button className='bg-geraldine w-full my-4 py-2 text-medium text-white font-bold shadow-lg hover:scale-95'>
             SALVAR
