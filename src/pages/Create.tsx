@@ -26,7 +26,10 @@ interface ImageItemProps {
 }
 
 const schema = z.object({
-  title: z.string().min(1, { message: 'O título é obrigatório' }),
+  title: z
+    .string()
+    .min(1, { message: 'O título é obrigatório' })
+    .max(30, { message: 'O título pode ter no máximo 30 caracteres' }),
   date: z
     .string()
     .min(1, { message: 'A data é obrigatória' })
@@ -174,7 +177,7 @@ export function Create() {
       />
 
       <h1 className='pt-14 pb-2 font-medium text-4xl'>Novo Cadastro</h1>
-      <p className='pb-14'>
+      <p className='pb-14 text-center'>
         adicione nos campos abaixo os dados do seu novo trabalho e não se
         esqueça de clicar em salvar
       </p>
