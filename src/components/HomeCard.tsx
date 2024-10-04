@@ -30,10 +30,14 @@ export function HomeCard({
 
   return (
     <>
-      <div className='group relative shadow-md shadow-geraldine rounded-xl'>
+      <div
+        className='group relative shadow-md shadow-geraldine rounded-xl'
+        data-testid='project'
+      >
         <button
           className='absolute right-0 p-1 bg-geraldine hidden group-hover:block'
           onClick={handleDeleteProject}
+          data-testid='projectTrash'
         >
           <GoTrash size={18} />
         </button>
@@ -52,7 +56,7 @@ export function HomeCard({
           />
         </div>
 
-        <Link to={`projeto/${id}`}>
+        <Link to={`projeto/${id}`} data-testid='projectLink'>
           <div>
             <h4 className='h-14 p-2 font-bold tracking-tight break-words line-clamp-2'>
               {title}
