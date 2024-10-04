@@ -25,7 +25,7 @@ export function Header() {
     <header className='w-full shadow-lg'>
       <nav className='container m-auto px-4 h-[60px] center justify-between'>
         <Link to={'/'}>
-          <img src={logo} alt='logo' className='h-10' />
+          <img src={logo} alt='logo' className='h-10' data-testid='logo' />
         </Link>
 
         {!loadingAuth && isSigned && (
