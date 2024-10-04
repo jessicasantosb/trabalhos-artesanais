@@ -4,7 +4,7 @@ import { HomeCard } from '../../components';
 
 describe('Components - HomeCard', () => {
   it('should render HomeCard', () => {
-    render(
+    const { getByRole } = render(
       <MemoryRouter>
         <HomeCard
           key={1}
@@ -21,6 +21,10 @@ describe('Components - HomeCard', () => {
 
     expect(screen.getByTestId('projectLink')).toBeInTheDocument();
     expect(screen.getByTestId('projectTrash')).toBeInTheDocument();
+    expect(getByRole('img')).toBeInTheDocument();
+    expect(getByRole('button')).toBeInTheDocument();
+    expect(getByRole('link')).toBeInTheDocument();
+    expect(getByRole('heading')).toBeInTheDocument();
   });
 
   it('should be able to fire a event', () => {
