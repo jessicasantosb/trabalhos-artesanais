@@ -10,10 +10,20 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
+    'react/tsx-uses-react': 'off',
+    'react/react-in-tsx-scope': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  overrides: [
+    {
+      files: ['tests/**/*'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
