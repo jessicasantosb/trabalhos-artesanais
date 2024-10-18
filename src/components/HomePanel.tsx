@@ -4,6 +4,7 @@ import { MdOutlineFilterList } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { FilterByColor } from './filters/FilterByColor';
 import { FilterByTitle } from './filters/FilterByTitle';
+import { FilterByYear } from './filters/FilterByYear';
 
 interface HomePanelProps {
   inputTitle: string;
@@ -66,24 +67,7 @@ export function HomePanel({
             />
           </div>
 
-          <div className='relative'>
-            <label className='pointer-events-none select-none absolute left-2 -top-3 text-[11px] bg-opacity-80 bg-white p-1'>
-              selecione um ano
-            </label>
-            <select
-              className='bg-white border border-geraldine px-8 p-2 focus:border-2 focus:outline-0'
-              onChange={(e) => handleSearchYear(e)}
-            >
-              <option value='all'>todos</option>
-              {years.map((year, index) => {
-                return (
-                  <option key={index} value={year}>
-                    {year}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          <FilterByYear years={years} handleSearchYear={handleSearchYear} />
         </div>
       )}
     </section>
