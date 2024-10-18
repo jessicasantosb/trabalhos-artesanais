@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IoMdCreate, IoMdSearch } from 'react-icons/io';
 import { MdOutlineFilterList } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { FilterByTitle } from './filters/FilterByTitle';
 
 interface HomePanelProps {
   inputTitle: string;
@@ -51,18 +52,11 @@ export function HomePanel({
       {openedFilter && (
         <div className='w-full my-4 center flex-col gap-6'>
           <div className='center flex-col md:flex-row gap-4 md:gap-6'>
-            <div className='filterBtnDiv'>
-              <input
-                type='text'
-                placeholder='pesquise pelo título'
-                value={inputTitle}
-                onChange={(e) => setInputTitle(e.target.value)}
-                className='filterBtnInput'
-              />
-              <button onClick={handleSearchTitle} className='filterBtn'>
-                <IoMdSearch size={20} />
-              </button>
-            </div>
+            <FilterByTitle
+              inputTitle={inputTitle}
+              setInputTitle={setInputTitle}
+              handleSearchTitle={handleSearchTitle}
+            />
 
             <div className='filterBtnDiv'>
               <input
