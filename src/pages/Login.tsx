@@ -8,17 +8,10 @@ import { z } from 'zod';
 
 import image from '../assets/login-img.jpg';
 import { Head, Input } from '../components';
+import { loginSchema } from '../schemas';
 import { auth } from '../services';
 
-const schema = z.object({
-  email: z
-    .string()
-    .email('Insira um email válido')
-    .nonempty('O campo email é obrigatório'),
-  password: z.string().nonempty('O campo senha é obrigatório'),
-});
-
-type formData = z.infer<typeof schema>;
+type formData = z.infer<typeof loginSchema>;
 
 export function Login() {
   const [error, setError] = useState('');
@@ -28,7 +21,10 @@ export function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<formData>({ resolver: zodResolver(schema), mode: 'onChange' });
+  } = useForm<formData>({
+    resolver: zodResolver(loginSchema),
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     const logout = async () => {
@@ -56,10 +52,7 @@ export function Login() {
 
   return (
     <section className='authSection'>
-      <Head
-        title='Entrar'
-        description='Entre agora!'
-      />
+      <Head title='Entrar' description='Entre agora!' />
 
       <main className='authContainer'>
         <img

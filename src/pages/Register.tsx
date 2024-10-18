@@ -13,29 +13,10 @@ import { z } from 'zod';
 import image from '../assets/register-img.jpg';
 import { Head, Input } from '../components';
 import { useAuthContext } from '../hooks';
+import { registerSchema } from '../schemas';
 import { auth } from '../services';
 
-const schema = z
-  .object({
-    name: z.string().nonempty('O campo nome é obrigatório'),
-    email: z
-      .string()
-      .email('Insira um email válido')
-      .nonempty('O campo email é obrigatório'),
-    password: z
-      .string()
-      .min(8, 'A senha deve ter no mínimo 8 caracteres')
-      .nonempty('O campo senha é obrigatório'),
-    confirmPassword: z
-      .string()
-      .nonempty('O campo confirmação de senha é obrigatório'),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'As senhas devem ser iguais',
-    path: ['confirmPassword'],
-  });
-
-type formData = z.infer<typeof schema>;
+type formData = z.infer<typeof registerSchema>;
 
 export function Register() {
   const [error, setError] = useState('');
@@ -46,7 +27,10 @@ export function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<formData>({ resolver: zodResolver(schema), mode: 'onChange' });
+  } = useForm<formData>({
+    resolver: zodResolver(registerSchema),
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     const logout = async () => {
@@ -84,10 +68,7 @@ export function Register() {
 
   return (
     <section className='authSection'>
-      <Head
-        title='Cadastrar'
-        description='Registre-se agora!'
-      />
+      <Head title='Cadastrar' description='Registre-se agora!' />
 
       <main className='authContainer'>
         <img

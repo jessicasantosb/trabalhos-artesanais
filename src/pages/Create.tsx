@@ -16,58 +16,11 @@ import { z } from 'zod';
 
 import { Head, Input } from '../components';
 import { useAuthContext } from '../hooks';
+import { createSchema } from '../schemas';
 import { db, storage } from '../services';
-import { ImageItemProps } from './types';
+import { ImageItemProps } from '../types';
 
-const schema = z.object({
-  title: z
-    .string()
-    .min(1, { message: 'O título é obrigatório' })
-    .max(30, { message: 'O título pode ter no máximo 30 caracteres' }),
-  date: z
-    .string()
-    .min(1, { message: 'A data é obrigatória' })
-    .regex(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/[12][0-9]{3}$/, {
-      message: 'Insira uma data válida DD/MM/AAAA',
-    }),
-  client: z
-    .string()
-    .min(1, { message: 'O nome do cliente é obrigatório' })
-    .max(30, { message: 'O nome do cliente pode ter no máximo 30 caracteres' }),
-  price: z
-    .union([
-      z
-        .string()
-        .min(1, { message: 'O preço é obrigatório' })
-        .transform((x) => {
-          const numStr = x
-            .replace(/\./g, '')
-            .replace(',', '.')
-            .replace(/[^0-9.-]+/g, '');
-          return parseFloat(numStr);
-        }),
-      z.number(),
-    ])
-    .pipe(
-      z.coerce
-        .number({ invalid_type_error: 'Insira um número válido' })
-        .min(0.0001)
-        .max(99999999, { message: 'Valor inválido' })
-    ),
-  color: z
-    .string()
-    .min(1, { message: 'A cor é obrigatória' })
-    .max(30, { message: 'A cor pode ter no máximo 30 caracteres' }),
-  size: z
-    .string()
-    .min(1, { message: 'O tamanho é obrigatório' })
-    .max(30, { message: 'O tamanho pode ter no máximo 30 caracteres' }),
-  description: z
-    .string()
-    .max(300, { message: 'A descrição pode ter no máximo 300 caracteres' }),
-});
-
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof createSchema>;
 
 export function Create() {
   const [projectImage, setProjectImage] = useState<ImageItemProps[]>([]);
@@ -78,7 +31,7 @@ export function Create() {
     formState: { errors },
     reset,
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(createSchema),
     mode: 'onChange',
   });
   const navigate = useNavigate();

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
+
 import { Head } from '../components';
 import { useAuthContext } from '../hooks';
 
