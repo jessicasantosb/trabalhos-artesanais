@@ -2,18 +2,13 @@ import { useState } from 'react';
 import { IoMdCreate } from 'react-icons/io';
 import { MdOutlineFilterList } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { FilterByColor } from './filters/FilterByColor';
-import { FilterByTitle } from './filters/FilterByTitle';
+
+import { FilterByText } from './filters/FilterByText';
 import { FilterByYear } from './filters/FilterByYear';
 import { HomePanelProps } from './types';
 
 export function HomePanel({
-  inputTitle,
-  setInputTitle,
-  handleSearchTitle,
-  inputColor,
-  setInputColor,
-  handleSearchColor,
+  onSearch,
   years,
   handleSearchYear,
 }: HomePanelProps) {
@@ -42,20 +37,16 @@ export function HomePanel({
       </div>
 
       {openedFilter && (
-        <div className='w-full my-4 center flex-col gap-6'>
-          <div className='center flex-col md:flex-row gap-4 md:gap-6'>
-            <FilterByTitle
-              inputTitle={inputTitle}
-              setInputTitle={setInputTitle}
-              handleSearchTitle={handleSearchTitle}
-            />
+        <div className='w-full my-4 center flex-col md:flex-row gap-4 md:gap-'>
+          <FilterByText
+            onSearch={({ target }) => onSearch(target.value, 'title')}
+            placeholder='pesquise pelo título'
+          />
 
-            <FilterByColor
-              inputColor={inputColor}
-              setInputColor={setInputColor}
-              handleSearchColor={handleSearchColor}
-            />
-          </div>
+          <FilterByText
+            onSearch={({ target }) => onSearch(target.value, 'color')}
+            placeholder='pesquise pela cor'
+          />
 
           <FilterByYear years={years} handleSearchYear={handleSearchYear} />
         </div>

@@ -7,7 +7,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 import { Head, HomeCard, HomePanel } from '../components';
@@ -16,8 +16,6 @@ import { db, storage } from '../services';
 import { LoadProjectProps } from '../types';
 
 export function Home() {
-  const [inputTitle, setInputTitle] = useState('');
-  const [inputColor, setInputColor] = useState('');
   const { user, projects, setProjects, projectsDuplicated, loadProjects } =
     useAuthContext();
 
@@ -63,7 +61,7 @@ export function Home() {
     }
   };
 
-  const handleSearch = async (field: string, input: string) => {
+  const handleSearch = async (input: string, field: string) => {
     if (input === '' || input === 'all') {
       loadProjects();
       return;
@@ -154,12 +152,7 @@ export function Home() {
       </p>
 
       <HomePanel
-        inputTitle={inputTitle}
-        setInputTitle={setInputTitle}
-        handleSearchTitle={() => handleSearch('title', inputTitle)}
-        inputColor={inputColor}
-        setInputColor={setInputColor}
-        handleSearchColor={() => handleSearch('color', inputColor)}
+        onSearch={handleSearch}
         years={years}
         handleSearchYear={handleSearchYear}
       />

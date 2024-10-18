@@ -1,15 +1,8 @@
-import { RegisterOptions, UseFormRegister } from "react-hook-form";
+import { RegisterOptions, UseFormRegister } from 'react-hook-form';
 
-export interface FilterByColorProps {
-  inputColor: string;
-  setInputColor: (event: string) => void;
-  handleSearchColor: (event: React.MouseEvent<HTMLElement>) => void;
-}
-
-export interface FilterByTitleProps {
-  inputTitle: string;
-  setInputTitle: (event: string) => void;
-  handleSearchTitle: (event: React.MouseEvent<HTMLElement>) => void;
+export interface FilterByTextProps {
+  placeholder: string;
+  onSearch: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export interface FilterByYearProps {
@@ -33,12 +26,7 @@ export interface CardProps {
 }
 
 export interface HomePanelProps {
-  inputTitle: string;
-  setInputTitle: (event: string) => void;
-  handleSearchTitle: (event: React.MouseEvent<HTMLElement>) => void;
-  inputColor: string;
-  setInputColor: (event: string) => void;
-  handleSearchColor: (event: React.MouseEvent<HTMLElement>) => void;
+  onSearch: (input: string, field: string) => void;
   years: number[];
   handleSearchYear: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
