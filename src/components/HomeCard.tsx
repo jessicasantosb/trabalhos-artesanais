@@ -2,16 +2,7 @@ import { useState } from 'react';
 import { CiImageOn } from 'react-icons/ci';
 import { GoTrash } from 'react-icons/go';
 import { Link } from 'react-router-dom';
-
-interface CardProps {
-  id: string;
-  image: string;
-  title: string;
-  date: string;
-  client: string;
-  price: string;
-  handleDeleteProject: (event: React.MouseEvent<HTMLElement>) => void;
-}
+import { CardProps } from './types';
 
 export function HomeCard({
   id,

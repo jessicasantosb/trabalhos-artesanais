@@ -1,10 +1,6 @@
-export function FilterByYear({
-  years,
-  handleSearchYear,
-}: {
-  years: number[];
-  handleSearchYear: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}) {
+import { FilterByYearProps } from '../types';
+
+export function FilterByYear({ years, handleSearchYear }: FilterByYearProps) {
   return (
     <div className='relative'>
       <label className='pointer-events-none select-none absolute left-2 -top-3 text-[11px] bg-opacity-80 bg-white p-1'>

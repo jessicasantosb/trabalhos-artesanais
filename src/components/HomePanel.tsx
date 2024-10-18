@@ -5,17 +5,7 @@ import { Link } from 'react-router-dom';
 import { FilterByColor } from './filters/FilterByColor';
 import { FilterByTitle } from './filters/FilterByTitle';
 import { FilterByYear } from './filters/FilterByYear';
-
-interface HomePanelProps {
-  inputTitle: string;
-  setInputTitle: (event: string) => void;
-  handleSearchTitle: (event: React.MouseEvent<HTMLElement>) => void;
-  inputColor: string;
-  setInputColor: (event: string) => void;
-  handleSearchColor: (event: React.MouseEvent<HTMLElement>) => void;
-  years: number[];
-  handleSearchYear: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+import { HomePanelProps } from './types';
 
 export function HomePanel({
   inputTitle,

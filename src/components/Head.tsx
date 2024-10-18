@@ -1,9 +1,5 @@
 import { useEffect } from 'react';
-
-interface HeadProps {
-  title: string;
-  description: string;
-}
+import { HeadProps } from './types';
 
 export function Head(props: HeadProps) {
   useEffect(() => {

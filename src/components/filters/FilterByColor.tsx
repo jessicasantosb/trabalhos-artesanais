@@ -1,14 +1,11 @@
 import { IoMdSearch } from 'react-icons/io';
+import { FilterByColorProps } from '../types';
 
 export function FilterByColor({
   inputColor,
   setInputColor,
   handleSearchColor,
-}: {
-  inputColor: string;
-  setInputColor: (event: string) => void;
-  handleSearchColor: (event: React.MouseEvent<HTMLElement>) => void;
-}) {
+}: FilterByColorProps) {
   return (
     <div className='filterBtnDiv'>
       <input

@@ -1,14 +1,4 @@
-import { RegisterOptions, UseFormRegister } from 'react-hook-form';
-
-interface InputProps {
-  label?: string;
-  placeholder?: string;
-  type: string;
-  name: string;
-  register: UseFormRegister<any>;
-  error?: string;
-  rules?: RegisterOptions;
-}
+import { InputProps } from './types';
 
 export function Input({
   label,

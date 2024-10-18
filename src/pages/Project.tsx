@@ -12,27 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Head } from '../components';
 import { db } from '../services';
-
-interface ImagesProps {
-  name: string;
-  uid: string;
-  url: string;
-}
-
-interface ProjectProps {
-  id: string;
-  images: ImagesProps[];
-  title: string;
-  date: string;
-  client: string;
-  price: string;
-  color: string;
-  size: string;
-  description: string;
-  created: string;
-  owner: string;
-  uid: string;
-}
+import { ProjectProps } from '../types';
 
 export function Project() {
   const [project, setProject] = useState<ProjectProps>();

@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 import { Head, HomeCard, HomePanel } from '../components';
 import { useAuthContext } from '../hooks';
 import { db, storage } from '../services';
-import { ProjectProps } from '../types';
+import { LoadProjectProps } from '../types';
 
 export function Home() {
   const [inputTitle, setInputTitle] = useState('');
@@ -35,7 +35,7 @@ export function Home() {
     loadProjects();
   }, []);
 
-  const handleDeleteProject = async (project: ProjectProps) => {
+  const handleDeleteProject = async (project: LoadProjectProps) => {
     const projectItem = project;
 
     const answer = window.confirm(
@@ -80,7 +80,7 @@ export function Home() {
 
     const querySnapshot = await getDocs(q);
 
-    const projectsList = [] as ProjectProps[];
+    const projectsList = [] as LoadProjectProps[];
 
     querySnapshot.forEach((doc) => {
       projectsList.push({
@@ -123,7 +123,7 @@ export function Home() {
 
     const querySnapshot = await getDocs(q);
 
-    const projectsList = [] as ProjectProps[];
+    const projectsList = [] as LoadProjectProps[];
 
     querySnapshot.forEach((doc) => {
       projectsList.push({

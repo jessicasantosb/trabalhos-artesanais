@@ -1,47 +1,20 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import { auth, db } from '../services';
-import { ProjectProps } from '../types';
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-interface UserProps {
-  uid: string;
-  name: string | null;
-  email: string | null;
-}
-
-type AuthContextData = {
-  isSigned: boolean;
-  loadingAuth: boolean;
-  user: UserProps | null;
-  handleUserInfo: ({ uid, name, email }: UserProps) => void;
-  loadProjects: () => void;
-  projects: ProjectProps[];
-  setProjects: Dispatch<SetStateAction<ProjectProps[]>>;
-  projectsDuplicated: ProjectProps[];
-};
+import { LoadProjectProps } from '../types';
+import { AuthContextData, AuthProviderProps, UserProps } from './types';
 
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserProps | null>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
-  const [projects, setProjects] = useState<ProjectProps[]>([]);
-  const [projectsDuplicated, setProjectsDuplicated] = useState<ProjectProps[]>(
-    []
-  );
+  const [projects, setProjects] = useState<LoadProjectProps[]>([]);
+  const [projectsDuplicated, setProjectsDuplicated] = useState<
+    LoadProjectProps[]
+  >([]);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -73,7 +46,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const queryRef = query(projectRef, where('uid', '==', user?.uid));
 
     getDocs(queryRef).then((snapshot) => {
-      const projectsList = [] as ProjectProps[];
+      const projectsList = [] as LoadProjectProps[];
 
       snapshot.forEach((doc) => {
         projectsList.push({

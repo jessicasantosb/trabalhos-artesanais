@@ -17,13 +17,7 @@ import { z } from 'zod';
 import { Head, Input } from '../components';
 import { useAuthContext } from '../hooks';
 import { db, storage } from '../services';
-
-interface ImageItemProps {
-  uid: string;
-  name: string;
-  previewUrl: string;
-  url: string;
-}
+import { ImageItemProps } from './types';
 
 const schema = z.object({
   title: z

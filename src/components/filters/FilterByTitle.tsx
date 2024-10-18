@@ -1,14 +1,11 @@
 import { IoMdSearch } from 'react-icons/io';
+import { FilterByTitleProps } from '../types';
 
 export function FilterByTitle({
   inputTitle,
   setInputTitle,
   handleSearchTitle,
-}: {
-  inputTitle: string;
-  setInputTitle: (event: string) => void;
-  handleSearchTitle: (event: React.MouseEvent<HTMLElement>) => void;
-}) {
+}: FilterByTitleProps) {
   return (
     <div className='filterBtnDiv'>
       <input
