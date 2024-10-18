@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { IoMdCreate, IoMdSearch } from 'react-icons/io';
+import { IoMdCreate } from 'react-icons/io';
 import { MdOutlineFilterList } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { FilterByColor } from './filters/FilterByColor';
 import { FilterByTitle } from './filters/FilterByTitle';
 
 interface HomePanelProps {
@@ -58,18 +59,11 @@ export function HomePanel({
               handleSearchTitle={handleSearchTitle}
             />
 
-            <div className='filterBtnDiv'>
-              <input
-                type='text'
-                placeholder='pesquise pela cor'
-                value={inputColor}
-                onChange={(e) => setInputColor(e.target.value)}
-                className='filterBtnInput'
-              />
-              <button onClick={handleSearchColor} className='filterBtn'>
-                <IoMdSearch size={20} />
-              </button>
-            </div>
+            <FilterByColor
+              inputColor={inputColor}
+              setInputColor={setInputColor}
+              handleSearchColor={handleSearchColor}
+            />
           </div>
 
           <div className='relative'>
