@@ -7,12 +7,7 @@ describe('Components - HomePanel', () => {
     const { getByText } = render(
       <MemoryRouter>
         <HomePanel
-          inputTitle='test'
-          setInputTitle={() => 'test'}
-          handleSearchTitle={() => 'test'}
-          inputColor='test'
-          setInputColor={() => 'test'}
-          handleSearchColor={() => 'test'}
+          onSearch={() => 'test'}
           years={[2022, 2023, 2024]}
           handleSearchYear={() => 'test'}
         />
