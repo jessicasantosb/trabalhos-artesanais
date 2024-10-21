@@ -1,23 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addDoc, collection } from 'firebase/firestore';
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from 'firebase/storage';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { GoTrash, GoUpload } from 'react-icons/go';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 
-import { Head, Input } from '../components';
+import { Head, Input, UploadImage } from '../components';
 import { useAuthContext } from '../hooks';
 import { createSchema } from '../schemas';
-import { db, storage } from '../services';
+import { db } from '../services';
 import { ImageItemProps } from '../types';
 
 type FormData = z.infer<typeof createSchema>;
@@ -25,6 +17,7 @@ type FormData = z.infer<typeof createSchema>;
 export function Create() {
   const [projectImage, setProjectImage] = useState<ImageItemProps[]>([]);
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -34,60 +27,6 @@ export function Create() {
     resolver: zodResolver(createSchema),
     mode: 'onChange',
   });
-  const navigate = useNavigate();
-
-  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const image = e.target.files[0];
-
-      if (image.type === 'image/jpeg' || image.type === 'image/png') {
-        handleUpload(image);
-      } else {
-        alert('Envie apenas imagem jpeg ou png.');
-        return;
-      }
-    }
-  };
-
-  const handleUpload = async (image: File) => {
-    if (!user?.uid) {
-      return;
-    }
-
-    const currentUid = user?.uid;
-    const uidImage = uuidV4();
-
-    const uploadRef = ref(storage, `images/${currentUid}/${uidImage}`);
-
-    if (projectImage.length < 5) {
-      uploadBytes(uploadRef, image).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((downloadUrl) => {
-          const imageItem = {
-            name: uidImage,
-            uid: currentUid,
-            previewUrl: URL.createObjectURL(image),
-            url: downloadUrl,
-          };
-
-          setProjectImage((images) => [...images, imageItem]);
-        });
-      });
-    } else {
-      alert('Quantidade máxima de imagens atingida');
-    }
-  };
-
-  const handleDeleteImage = async (item: ImageItemProps) => {
-    const imagePath = `images/${item.uid}/${item.name}`;
-    const imageRef = ref(storage, imagePath);
-
-    try {
-      await deleteObject(imageRef);
-      setProjectImage(projectImage.filter((image) => image.url !== item.url));
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const onSubmit = (data: FormData) => {
     if (projectImage.length === 0) {
@@ -139,41 +78,12 @@ export function Create() {
         adicione nos campos abaixo os dados do seu novo trabalho e não se
         esqueça de clicar em salvar
       </p>
+
       <div>
-        <div className='flex flex-wrap gap-2 mb-4'>
-          <button className='h-24 w-full max-w-24 center bg-geraldine'>
-            <GoUpload
-              size={30}
-              className='absolute text-white pointer-events-none'
-            />
-            <label className='h-full w-full cursor-pointer' arial-hidden='true'>
-              <input
-                type='file'
-                accept='image/*'
-                className='opacity-0 hidden'
-                onChange={handleFile}
-              />
-            </label>
-          </button>
-          {projectImage.map((image) => {
-            return (
-              <div key={image.name} className='group h-24 center basis-24 grow'>
-                <button>
-                  <GoTrash
-                    size={32}
-                    className='absolute bottom-0 right-0 hidden group-hover:block bg-geraldine text-white p-1'
-                    onClick={() => handleDeleteImage(image)}
-                  />
-                </button>
-                <img
-                  src={image.url}
-                  alt={image.name}
-                  className='w-full h-full object-cover'
-                />
-              </div>
-            );
-          })}
-        </div>
+        <UploadImage
+          projectImage={projectImage}
+          setProjectImage={setProjectImage}
+        />
 
         <form
           onSubmit={handleSubmit(onSubmit)}

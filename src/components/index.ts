@@ -6,3 +6,4 @@ export * from './HomePanel';
 export * from './Input';
 export * from './Layout';
 export * from './ProjectDetail';
+export * from './UploadImage';
