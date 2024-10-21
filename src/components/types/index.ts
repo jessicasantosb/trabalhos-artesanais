@@ -1,4 +1,6 @@
+import { LegacyRef } from 'react';
 import { RegisterOptions, UseFormRegister } from 'react-hook-form';
+import { ProjectProps } from '../../types';
 
 export interface FilterByTextProps {
   placeholder: string;
@@ -39,4 +41,15 @@ export interface InputProps {
   register: UseFormRegister<any>;
   error?: string;
   rules?: RegisterOptions;
+}
+
+export interface ProjectDetailProps {
+  project: ProjectProps | undefined;
+  carousel: {
+    contentRef: LegacyRef<HTMLDivElement>;
+    imagePosition: number;
+    previewImage: () => void;
+    nextImage: () => void;
+  };
+  imageSkeleton: { skeleton: boolean; handleSkeleton: () => void };
 }

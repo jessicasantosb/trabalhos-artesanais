@@ -5,3 +5,4 @@ export * from './HomeCard';
 export * from './HomePanel';
 export * from './Input';
 export * from './Layout';
+export * from './ProjectDetail';
