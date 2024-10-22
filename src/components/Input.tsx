@@ -30,7 +30,7 @@ export function Input({
         {label}
         <div
           dir='ltr'
-          className='group flex shadow rounded-s-lg rounded-e-lg focus-within:outline outline-geraldine outline-1  bg-white [&>*]:bg-white'
+          className='group flex rounded-s-lg rounded-e-lg shadow shadow-geraldine  focus-within:shadow-blue focus-within:outline outline-blue outline-1  bg-white [&>*]:bg-white'
         >
           <input
             placeholder={placeholder}
