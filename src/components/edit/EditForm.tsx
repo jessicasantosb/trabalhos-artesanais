@@ -24,7 +24,7 @@ export function EditForm({
       <div className='w-full flex flex-col md:flex-row gap-2 md:gap-12 [&>*]:w-full [&>*]:center [&>*]:flex-col [&>*]:gap-2'>
         <div className='[&>*]:w-full [&>*]:flex [&>*]:items-start [&>*]:gap-2 [&>*]:md:h-16'>
           <label>
-            <IoSquare size={20} className='text-geraldine mt-2' />
+            <IoSquare size={20} className='text-geraldine mt-4' />
             <Input
               name='title'
               type='text'
@@ -34,7 +34,7 @@ export function EditForm({
             />
           </label>
           <label>
-            <IoPerson size={20} className='text-geraldine mt-2' />
+            <IoPerson size={20} className='text-geraldine mt-4' />
             <Input
               name='client'
               type='text'
@@ -44,7 +44,7 @@ export function EditForm({
             />
           </label>
           <label>
-            <IoIosColorPalette size={20} className='text-geraldine mt-2' />
+            <IoIosColorPalette size={20} className='text-geraldine mt-4' />
             <Input
               name='color'
               type='text'
@@ -57,7 +57,7 @@ export function EditForm({
 
         <div className='[&>*]:w-full [&>*]:flex [&>*]:items-start [&>*]:gap-2 [&>*]:md:h-16'>
           <label>
-            <MdDateRange size={20} className='text-geraldine mt-2' />
+            <MdDateRange size={20} className='text-geraldine mt-4' />
             <Input
               name='date'
               type='text'
@@ -67,7 +67,7 @@ export function EditForm({
             />
           </label>
           <label>
-            <IoIosPricetags size={20} className='text-geraldine mt-2' />
+            <IoIosPricetags size={20} className='text-geraldine mt-4' />
             <Input
               name='price'
               type='text'
@@ -77,7 +77,7 @@ export function EditForm({
             />
           </label>
           <label>
-            <MdPhotoSizeSelectLarge size={20} className='text-geraldine mt-2' />
+            <MdPhotoSizeSelectLarge size={20} className='text-geraldine mt-4' />
             <Input
               name='size'
               type='text'
