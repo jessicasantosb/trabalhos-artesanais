@@ -1,4 +1,4 @@
-import { LegacyRef } from 'react';
+import { Dispatch, LegacyRef, SetStateAction } from 'react';
 import { RegisterOptions, UseFormRegister } from 'react-hook-form';
 import { ProjectProps } from '../../types';
 
@@ -53,4 +53,9 @@ export interface ProjectDetailProps {
     nextImage: () => void;
   };
   imageSkeleton: { skeleton: boolean; handleSkeleton: () => void };
+}
+
+export interface EditFormProps {
+  project: ProjectProps;
+  setEditFormIsOpen: Dispatch<SetStateAction<boolean>>;
 }
