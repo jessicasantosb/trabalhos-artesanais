@@ -1,8 +1,9 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useRef, useState } from 'react';
+import { MdEdit } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Head, ProjectDetail } from '../components';
+import { EditProject, Head, ProjectDetail } from '../components';
 import { db } from '../services';
 import { ProjectProps } from '../types';
 
@@ -11,12 +12,17 @@ export function Project() {
   const [skeleton, setSkeleton] = useState<boolean>(true);
   const [imageIsActive, setImageIsActive] = useState<number>(0);
   const [imagePosition, setImagePosition] = useState<number>(0);
+  const [editFormIsOpen, setEditFormIsOpen] = useState<boolean>(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
   const handleSkeleton = () => {
     setSkeleton(false);
+  };
+
+  const handleOpenEditForm = () => {
+    setEditFormIsOpen(!editFormIsOpen);
   };
 
   const previewImage = () => {
@@ -71,11 +77,38 @@ export function Project() {
   return (
     <section className='container m-auto p-4'>
       {project && <Head title={project.title} description='' />}
-      <ProjectDetail
-        project={project}
-        carousel={{ contentRef, imagePosition, nextImage, previewImage }}
-        imageSkeleton={{ skeleton, handleSkeleton }}
-      />
+
+      {!editFormIsOpen ? (
+        <>
+          <ProjectDetail
+            project={project}
+            carousel={{ contentRef, imagePosition, nextImage, previewImage }}
+            imageSkeleton={{ skeleton, handleSkeleton }}
+          />
+
+          <button
+            className='group flex items-center gap-2'
+            onClick={handleOpenEditForm}
+          >
+            <MdEdit
+              size={20}
+              className='text-blue group-hover:text-geraldine'
+            />
+            clique aqui para{' '}
+            <span className='underline text-blue group-hover:text-geraldine'>
+              editar
+            </span>{' '}
+            esse projeto
+          </button>
+        </>
+      ) : (
+        project && (
+          <EditProject
+            project={project}
+            setEditFormIsOpen={setEditFormIsOpen}
+          />
+        )
+      )}
     </section>
   );
 }

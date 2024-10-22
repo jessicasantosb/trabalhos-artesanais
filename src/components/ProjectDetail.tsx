@@ -6,6 +6,7 @@ import {
   IoIosPricetags,
 } from 'react-icons/io';
 import { MdDateRange, MdPhotoSizeSelectLarge } from 'react-icons/md';
+
 import { ProjectDetailProps } from './types';
 
 export function ProjectDetail({
