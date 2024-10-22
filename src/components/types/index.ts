@@ -36,6 +36,7 @@ export interface HomePanelProps {
 export interface InputProps {
   label?: string;
   placeholder?: string;
+  defaultValue?: string;
   type: string;
   name: string;
   register: UseFormRegister<any>;

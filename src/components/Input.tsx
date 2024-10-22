@@ -6,6 +6,7 @@ import { InputProps } from './types';
 export function Input({
   label,
   placeholder,
+  defaultValue,
   type,
   name,
   register,
@@ -33,6 +34,7 @@ export function Input({
         >
           <input
             placeholder={placeholder}
+            defaultValue={defaultValue}
             type={inputType}
             {...register(name, rules)}
             id={name}
