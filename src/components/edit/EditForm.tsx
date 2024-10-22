@@ -48,7 +48,7 @@ export function EditForm({
             <Input
               name='color'
               type='text'
-              defaultValue={project?.color}
+              defaultValue={project?.color.toLowerCase()}
               register={register}
               error={errors.color?.message}
             />
