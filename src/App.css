@@ -36,7 +36,7 @@
     @apply flex flex-col
   }
   .authBtn {
-    @apply w-full h-10 my-6 uppercase font-bold rounded-lg border shadow-sm  bg-geraldine border-geraldine hover:bg-opacity-60 hover:scale-95 hover:shadow-none;
+    @apply w-full h-10 my-6 uppercase font-bold border shadow-sm  bg-geraldine border-geraldine hover:bg-opacity-60 hover:scale-95 hover:shadow-none;
   }
   .authLink {
     @apply underline opacity-95 hover:opacity-70
