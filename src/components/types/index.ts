@@ -1,5 +1,10 @@
 import { Dispatch, LegacyRef, SetStateAction } from 'react';
-import { RegisterOptions, UseFormRegister } from 'react-hook-form';
+import {
+  FieldErrors,
+  RegisterOptions,
+  UseFormHandleSubmit,
+  UseFormRegister,
+} from 'react-hook-form';
 import { ProjectProps } from '../../types';
 
 export interface FilterByTextProps {
@@ -55,7 +60,37 @@ export interface ProjectDetailProps {
   imageSkeleton: { skeleton: boolean; handleSkeleton: () => void };
 }
 
-export interface EditFormProps {
+export interface EditProjectProps {
   project: ProjectProps;
   setEditFormIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface EditFormProps {
+  project: ProjectProps;
+  setEditFormIsOpen: (isOpen: boolean) => void;
+  formHook: {
+    handleSubmit: UseFormHandleSubmit<
+      {
+        title: string;
+        date: string;
+        client: string;
+        price: number;
+        color: string;
+        size: string;
+        description: string;
+      },
+      undefined
+    >;
+    handleEditProject: any;
+    register: any;
+    errors: FieldErrors<{
+      title: string;
+      date: string;
+      client: string;
+      price: number;
+      color: string;
+      size: string;
+      description: string;
+    }>;
+  };
 }
