@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
 
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks';
 import { createSchema } from '../../schemas';
 import { db } from '../../services';
@@ -19,8 +18,6 @@ type FormData = z.infer<typeof createSchema>;
 export function EditProject({ project, setEditFormIsOpen }: EditProjectProps) {
   const [projectImage, setProjectImage] = useState<ImagesProps[]>([]);
   const { user } = useAuthContext();
-  const navigate = useNavigate();
-  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -66,7 +63,7 @@ export function EditProject({ project, setEditFormIsOpen }: EditProjectProps) {
       setProjectImage([]);
       toast.success('Editado com sucesso!');
       setEditFormIsOpen(false);
-      navigate(location.pathname);
+      location.reload();
     } catch (error) {
       console.error('error: ', error);
     }
