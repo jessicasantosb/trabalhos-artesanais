@@ -3,9 +3,8 @@ import { IoMdCreate } from 'react-icons/io';
 import { MdOutlineFilterList } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import { FilterByText } from './filters/FilterByText';
-import { FilterByYear } from './filters/FilterByYear';
-import { HomePanelProps } from './types';
+import { FilterByText, FilterByYear } from '../filters';
+import { HomePanelProps } from '../types';
 
 export function HomePanel({
   onSearch,

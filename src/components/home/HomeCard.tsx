@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { CiImageOn } from 'react-icons/ci';
 import { GoTrash } from 'react-icons/go';
 import { Link } from 'react-router-dom';
-import { CardProps } from './types';
+
+import { CardProps } from '../types';
 
 export function HomeCard({
   id,
