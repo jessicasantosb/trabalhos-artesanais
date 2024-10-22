@@ -1,13 +1,7 @@
 export interface ImagesProps {
-  name: string;
-  uid: string;
-  url: string;
-}
-
-export interface ImageItemProps {
   uid: string;
   name: string;
-  previewUrl: string;
+  previewUrl?: string;
   url: string;
 }
 

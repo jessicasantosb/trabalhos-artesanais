@@ -10,12 +10,12 @@ import { Head, Input, UploadImage } from '../components';
 import { useAuthContext } from '../hooks';
 import { createSchema } from '../schemas';
 import { db } from '../services';
-import { ImageItemProps } from '../types';
+import { ImagesProps } from '../types';
 
 type FormData = z.infer<typeof createSchema>;
 
 export function Create() {
-  const [projectImage, setProjectImage] = useState<ImageItemProps[]>([]);
+  const [projectImage, setProjectImage] = useState<ImagesProps[]>([]);
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const {

@@ -10,14 +10,14 @@ import { v4 as uuidV4 } from 'uuid';
 
 import { useAuthContext } from '../hooks';
 import { storage } from '../services';
-import { ImageItemProps } from '../types';
+import { ImagesProps } from '../types';
 
 export function UploadImage({
   projectImage,
   setProjectImage,
 }: {
-  projectImage: ImageItemProps[];
-  setProjectImage: Dispatch<SetStateAction<ImageItemProps[]>>;
+  projectImage: ImagesProps[];
+  setProjectImage: Dispatch<SetStateAction<ImagesProps[]>>;
 }) {
   const { user } = useAuthContext();
 
@@ -62,7 +62,7 @@ export function UploadImage({
     }
   };
 
-  const handleDeleteImage = async (item: ImageItemProps) => {
+  const handleDeleteImage = async (item: ImagesProps) => {
     const imagePath = `images/${item.uid}/${item.name}`;
     const imageRef = ref(storage, imagePath);
 
@@ -75,7 +75,7 @@ export function UploadImage({
   };
 
   return (
-    <div className='relative flex flex-wrap gap-2 mb-4'>
+    <div className='flex flex-wrap gap-2 mb-4'>
       <button className='h-24 w-full max-w-24 center bg-geraldine'>
         <GoUpload
           size={30}
@@ -92,7 +92,10 @@ export function UploadImage({
       </button>
       {projectImage.map((image) => {
         return (
-          <div key={image.name} className='group h-24 center basis-24 grow'>
+          <div
+            key={image.name}
+            className='relative group h-24 center basis-24 grow'
+          >
             <button>
               <GoTrash
                 size={32}
