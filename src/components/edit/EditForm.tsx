@@ -19,7 +19,7 @@ export function EditForm({
   return (
     <form
       onSubmit={handleSubmit(handleEditProject)}
-      className='my-6 flex flex-col items-center gap-2'
+      className='my-6 flex flex-col items-center gap-4'
     >
       <div className='w-full flex flex-col md:flex-row gap-2 md:gap-12 [&>*]:w-full [&>*]:center [&>*]:flex-col [&>*]:gap-2'>
         <div className='[&>*]:w-full [&>*]:flex [&>*]:items-start [&>*]:gap-2 [&>*]:md:h-16'>
