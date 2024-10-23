@@ -71,7 +71,10 @@ export function EditForm({
             <Input
               name='price'
               type='text'
-              defaultValue={project?.price}
+              defaultValue={project.price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
               register={register}
               error={errors.price?.message}
             />

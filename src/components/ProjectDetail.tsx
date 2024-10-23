@@ -76,7 +76,10 @@ export function ProjectDetail({
         </p>
         <p>
           <IoIosPricetags size={20} className='text-geraldine' />
-          {project?.price}
+          {project?.price.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          })}
         </p>
         <p>
           <MdPhotoSizeSelectLarge size={20} className='text-geraldine' />
