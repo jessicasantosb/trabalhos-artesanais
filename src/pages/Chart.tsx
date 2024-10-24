@@ -37,12 +37,17 @@ export function Chart() {
         no gráfico abaixo
       </p>
 
-      <div>
+      <div className='w-full'>
         <VictoryChart
           domainPadding={20}
           animate={{ duration: 2000, easing: 'bounce' }}
         >
-          <VictoryAxis dependentAxis />
+          <VictoryAxis
+            style={{
+              tickLabels: { fontSize: 6 },
+            }}
+            dependentAxis
+          />
           <VictoryBar
             horizontal
             style={{ data: { fill: '#FF8F94' } }}
