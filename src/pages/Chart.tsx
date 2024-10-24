@@ -3,6 +3,7 @@ import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
 
 import { Head } from '../components';
 import { useAuthContext } from '../hooks';
+import { formatPrice } from '../utils';
 
 export function Chart() {
   const [graph, setGraph] = useState([]);
@@ -16,10 +17,7 @@ export function Chart() {
     const graphData: any = projects.map((item) => {
       return {
         x: item.client,
-        y: item.price.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }),
+        y: formatPrice(item.price),
       };
     });
 

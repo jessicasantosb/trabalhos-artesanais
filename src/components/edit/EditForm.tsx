@@ -6,6 +6,8 @@ import {
   MdDescription,
   MdPhotoSizeSelectLarge,
 } from 'react-icons/md';
+
+import { formatPrice } from '../../utils';
 import { Input } from '../Input';
 import { EditFormProps } from '../types';
 
@@ -71,10 +73,7 @@ export function EditForm({
             <Input
               name='price'
               type='text'
-              defaultValue={project.price.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
+              defaultValue={formatPrice(Number(project.price))}
               register={register}
               error={errors.price?.message}
             />

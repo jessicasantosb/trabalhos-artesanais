@@ -7,6 +7,7 @@ import {
 } from 'react-icons/io';
 import { MdDateRange, MdPhotoSizeSelectLarge } from 'react-icons/md';
 
+import { formatPrice } from '../utils';
 import { ProjectDetailProps } from './types';
 
 export function ProjectDetail({
@@ -76,10 +77,7 @@ export function ProjectDetail({
         </p>
         <p>
           <IoIosPricetags size={20} className='text-geraldine' />
-          {project?.price.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-          })}
+          {formatPrice(Number(project?.price))}
         </p>
         <p>
           <MdPhotoSizeSelectLarge size={20} className='text-geraldine' />

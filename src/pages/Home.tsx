@@ -14,6 +14,7 @@ import { Head, HomeCard, HomePanel } from '../components';
 import { useAuthContext } from '../hooks';
 import { db, storage } from '../services';
 import { LoadProjectProps } from '../types';
+import { formatPrice } from '../utils';
 
 export function Home() {
   const { user, projects, setProjects, projectsDuplicated, loadProjects } =
@@ -168,10 +169,7 @@ export function Home() {
                 title={project.title}
                 date={project.date}
                 client={project.client}
-                price={project.price.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                })}
+                price={formatPrice(project.price)}
                 handleDeleteProject={() => handleDeleteProject(project)}
               />
             );
