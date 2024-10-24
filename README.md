@@ -1,54 +1,88 @@
-# Trabalhos Artesanais
+<p align="center">
+  <img src="https://img.icons8.com/?size=100&id=asWSSTBrDlTW&format=png&color=000000" width="99">
+  <img src="https://img.icons8.com/?size=100&id=Xf1sHBmY73hA&format=png&color=000000" width="99">
+  <img src="https://img.icons8.com/?size=100&id=ROMfFZ1tMhpk&format=png&color=000000" width="99">
+</p>
+<h1 align="center">Trabalhos Artesanais</h1>
+<p align="center">
+  Este projeto <code>fullstack</code> foi desenvolvido em React, Typescript e Firebase
+</p>
 
-[Português]
-O Trabalhos Artesanais é um projeto com o objetivo de facilitar a administração de vendas, funcionando como um caderno online. Os usuários podem cadastrar seus trabalhos com as respectivas informações de forma intuitiva, permitindo um controle e histórico mais eficazes.
+---
 
-[English]
-Trabalhos Artesanais is a project to facilitate sales management that works like an online notebook. Users can intuitively enter their works with the relevant information, allowing for more efficient control and record-keeping.
+## 📍 Visão Geral
 
-## Getting Started
-Para começar no Booking Room API, siga estes passos:
+**_Objetivo_**
 
-1. Clonar o repositório: **`git clone https://github.com/jessicasantosb/trabalhos-artesanais.git`**
-2. Entrar na pasta do projeto: **`cd trabalhos-artesanais`**
-3. Instalar as dependências: **`yarn`**
-4. Iniciar o aplicativo: **`yarn dev`**
+Desenvolvi o projeto 
+<a href="https://trabalhos-artesanais.vercel.app/"> Trabalhos Artesanais </a>
+com a finalidade de otimizar a gestão de vendas, funcionando como um caderno online. Os usuários podem cadastrar seus trabalhos de maneira intuitiva, permitindo um controle mais eficiente e um histórico completo das suas vendas.
 
-## Live Demo
+**_Motivação_**
 
-[Português]
-Confira a demonstração ao vivo
+Minha motivação foi criar uma ferramenta que ajude as pessoas a organizarem suas vendas de forma prática. Queria desenvolver uma aplicação simples e acessível, onde os usuários pudessem visualizar facilmente suas anotações e fotos dos trabalhos.
 
-[English]
-Check out the live demo
+<div align="center" >
+  <img src="src/assets/screenshot.png" alt="página inicial" height="300"/>
+</div>
 
-[Live Preview](https://trabalhos-artesanais.vercel.app/)
+---
 
-## Screenshot
+## 🧬 Funcionalidades
 
-![Home Page](src/assets/screenshot.png)
+- Autenticação de usuários via e-mail e senha.
+- Armazenamento seguro de informações e imagens no banco de dados.
+- Filtros de busca por título, cor ou ano.
+- Testes de código para garantir a qualidade do sistema.
 
-## Technology Stack
+---
 
-- React
+## 🚀 Começando
+
+### ⚙️ Instalação
+
+#### [![yarn](https://img.shields.io/badge/Yarn-3775A9.svg?style=flat&logo=Yarn&logoColor=white)](https://github.com/jessicasantosb/trabalhos-artesanais)
+
+```sh
+❯ git clone git@github.com:jessicasantosb/trabalhos-artesanais.git
+```
+
+```sh
+❯ cd trabalhos-artesanais
+```
+
+```sh
+❯ yarn
+```
+
+```sh
+❯ yarn dev
+```
+
+---
+
+### 🧪 Teste Unitário
+
+#### [![jest](https://img.shields.io/badge/Jest-0A9EDC.svg?style=flat&logo=Jest&logoColor=white)](https://github.com/jessicasantosb/trabalhos-artesanais)
+
+```sh
+❯ yarn test
+```
+
+---
+
+## 💻 Tecnologias
+
 - Typescript
-- Tailwind
+- React
 - Firebase
+- Tailwind
+- Jest
+- Eslint
 
-## Author
+---
 
-Created by Jessica Bandeira.
+## 🤝 Contribuições
 
-- LinkedIn: [Jessica's LinkedIn Profile](https://www.linkedin.com/in/jessicasantosb/)
-
-## Known Issues and Future Improvements
-
-[Português]
-
-- Mencione quaisquer problemas conhecidos ou limitações.
-- Esboce seus planos para melhorias futuras.
-
-[English]
-
-- Mention any known issues or limitations.
-- Outline your plans for future improvements.
+- 🔰 Mencione quaisquer problemas conhecidos ou limitações.
+- 🐛 Esboce seus planos para melhorias futuras.
