@@ -82,28 +82,32 @@ export function Register() {
             <Input
               label='Nome:'
               type='text'
-              error={errors.name?.message}
+              id='name'
+              errors={errors}
               {...register('name')}
             />
 
             <Input
               label='Email:'
               type='email'
-              error={errors.email?.message}
+              id='email'
+              errors={errors}
               {...register('email')}
             />
 
             <Input
               label='Senha:'
               type='password'
-              error={errors.password?.message}
+              id='password'
+              errors={errors}
               {...register('password')}
             />
 
             <Input
               label='Confirme a senha:'
               type='password'
-              error={errors.confirmPassword?.message}
+              id='confirmPassword'
+              errors={errors}
               {...register('confirmPassword')}
             />
 

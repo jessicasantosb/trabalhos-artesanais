@@ -1,13 +1,16 @@
+import { ErrorMessage } from '@hookform/error-message';
 import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react';
+import { FieldErrors } from 'react-hook-form';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
-  error?: string;
+  id: string;
+  errors: FieldErrors;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, ...props }, ref) => {
+  ({ label, id, errors, ...props }, ref) => {
     const [isPassword, setIsPassword] = useState(false);
     const [type, setType] = useState<'password' | 'text'>();
 
@@ -44,7 +47,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           </div>
         </label>
 
-        {error && <p className='my-1 text-red text-sm'>{error}</p>}
+        <p className='my-1 text-red text-sm'>
+          <ErrorMessage errors={errors} name={id} />
+        </p>
       </div>
     );
   },

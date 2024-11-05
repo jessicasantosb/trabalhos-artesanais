@@ -92,45 +92,51 @@ export function Create() {
             type='text'
             label='Título: *'
             placeholder='ex: Tapete em crochê'
+            id='title'
+            errors={errors}
             {...register('title')}
-            error={errors.title?.message}
           />
           <Input
             type='text'
             label='Cliente:'
             placeholder='ex: Maria'
+            id='client'
+            errors={errors}
             {...register('client')}
-            error={errors.client?.message}
           />
           <div className='flex flex-col justify-between sm:flex-row gap-4'>
             <Input
               type='text'
               label='Data:'
               placeholder='ex: DD/MM/AAAA'
+              id='date'
+              errors={errors}
               {...register('date')}
-              error={errors.date?.message}
             />
             <Input
               type='string'
               label='Preço:'
               placeholder='R$ 50,99'
+              id='price'
+              errors={errors}
               {...register('price')}
-              error={errors.price?.message}
             />
           </div>
           <Input
             type='text'
             label='Cor Principal:'
             placeholder='ex: Marrom'
+            id='color'
+            errors={errors}
             {...register('color')}
-            error={errors.color?.message}
           />
           <Input
             type='text'
             label='Tamanho:'
             placeholder='ex: 100cm x 40cm'
+            id='size'
+            errors={errors}
             {...register('size')}
-            error={errors.size?.message}
           />
           <label className='flex flex-col pt-2'>
             Descrição:
