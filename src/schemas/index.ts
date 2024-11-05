@@ -52,24 +52,21 @@ export const loginSchema = z.object({
   email: z
     .string()
     .email('Insira um email válido')
-    .nonempty('O campo email é obrigatório'),
-  password: z.string().nonempty('O campo senha é obrigatório'),
+    .min(1, 'O campo email é obrigatório'),
+  password: z.string().min(1, 'O campo senha é obrigatório'),
 });
 
 export const registerSchema = z
   .object({
-    name: z.string().nonempty('O campo nome é obrigatório'),
+    name: z.string().min(1, 'O campo nome é obrigatório'),
     email: z
       .string()
       .email('Insira um email válido')
-      .nonempty('O campo email é obrigatório'),
-    password: z
-      .string()
-      .min(8, 'A senha deve ter no mínimo 8 caracteres')
-      .nonempty('O campo senha é obrigatório'),
+      .min(1, 'O campo email é obrigatório'),
+    password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres'),
     confirmPassword: z
       .string()
-      .nonempty('O campo confirmação de senha é obrigatório'),
+      .min(1, 'O campo confirmação de senha é obrigatório'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'As senhas devem ser iguais',

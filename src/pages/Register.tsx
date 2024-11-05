@@ -82,33 +82,29 @@ export function Register() {
             <Input
               label='Nome:'
               type='text'
-              name='name'
               error={errors.name?.message}
-              register={register}
+              {...register('name')}
             />
 
             <Input
               label='Email:'
               type='email'
-              name='email'
               error={errors.email?.message}
-              register={register}
+              {...register('email')}
             />
 
             <Input
               label='Senha:'
               type='password'
-              name='password'
               error={errors.password?.message}
-              register={register}
+              {...register('password')}
             />
 
             <Input
               label='Confirme a senha:'
               type='password'
-              name='confirmPassword'
               error={errors.confirmPassword?.message}
-              register={register}
+              {...register('confirmPassword')}
             />
 
             {error && <p className='error'>{error}</p>}

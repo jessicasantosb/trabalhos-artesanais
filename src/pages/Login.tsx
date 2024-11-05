@@ -68,17 +68,15 @@ export function Login() {
             <Input
               label='Email:'
               type='email'
-              name='email'
               error={errors.email?.message}
-              register={register}
+              {...register('email')}
             />
 
             <Input
-              label='Password:'
+              label='Senha:'
               type='password'
-              name='password'
               error={errors.password?.message}
-              register={register}
+              {...register('password')}
             />
 
             {error && <p className='error'>{error}</p>}

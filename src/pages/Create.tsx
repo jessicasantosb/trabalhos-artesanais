@@ -89,53 +89,47 @@ export function Create() {
           onSubmit={handleSubmit(onSubmit)}
           className='w-full flex flex-col gap-2'>
           <Input
-            name='title'
             type='text'
             label='Título: *'
             placeholder='ex: Tapete em crochê'
-            register={register}
+            {...register('title')}
             error={errors.title?.message}
           />
           <Input
-            name='client'
             type='text'
             label='Cliente:'
             placeholder='ex: Maria'
-            register={register}
+            {...register('client')}
             error={errors.client?.message}
           />
           <div className='flex flex-col justify-between sm:flex-row gap-4'>
             <Input
-              name='date'
               type='text'
               label='Data:'
               placeholder='ex: DD/MM/AAAA'
-              register={register}
+              {...register('date')}
               error={errors.date?.message}
             />
             <Input
-              name='price'
               type='string'
               label='Preço:'
               placeholder='R$ 50,99'
-              register={register}
+              {...register('price')}
               error={errors.price?.message}
             />
           </div>
           <Input
-            name='color'
             type='text'
             label='Cor Principal:'
             placeholder='ex: Marrom'
-            register={register}
+            {...register('color')}
             error={errors.color?.message}
           />
           <Input
-            name='size'
             type='text'
             label='Tamanho:'
             placeholder='ex: 100cm x 40cm'
-            register={register}
+            {...register('size')}
             error={errors.size?.message}
           />
           <label className='flex flex-col pt-2'>
