@@ -27,31 +27,31 @@ export function EditForm({
           <label>
             <IoSquare size={20} className='text-geraldine mt-4' />
             <Input
-              name='title'
               type='text'
               defaultValue={project?.title.toLowerCase()}
-              register={register}
-              error={errors.title?.message}
+              id='title'
+              errors={errors}
+              {...register('title')}
             />
           </label>
           <label>
             <IoPerson size={20} className='text-geraldine mt-4' />
             <Input
-              name='client'
               type='text'
               defaultValue={project?.client}
-              register={register}
-              error={errors.client?.message}
+              id='client'
+              errors={errors}
+              {...register('client')}
             />
           </label>
           <label>
             <IoIosColorPalette size={20} className='text-geraldine mt-4' />
             <Input
-              name='color'
               type='text'
               defaultValue={project?.color.toLowerCase()}
-              register={register}
-              error={errors.color?.message}
+              id='color'
+              errors={errors}
+              {...register('color')}
             />
           </label>
         </div>
@@ -60,31 +60,31 @@ export function EditForm({
           <label>
             <MdDateRange size={20} className='text-geraldine mt-4' />
             <Input
-              name='date'
               type='text'
               defaultValue={project?.date}
-              register={register}
-              error={errors.date?.message}
+              id='date'
+              errors={errors}
+              {...register('date')}
             />
           </label>
           <label>
             <IoIosPricetags size={20} className='text-geraldine mt-4' />
             <Input
-              name='price'
               type='text'
               defaultValue={formatPrice(Number(project.price))}
-              register={register}
-              error={errors.price?.message}
+              id='price'
+              errors={errors}
+              {...register('price')}
             />
           </label>
           <label>
             <MdPhotoSizeSelectLarge size={20} className='text-geraldine mt-4' />
             <Input
-              name='size'
               type='text'
               defaultValue={project?.size}
-              register={register}
-              error={errors.size?.message}
+              id='size'
+              errors={errors}
+              {...register('size')}
             />
           </label>
         </div>
@@ -95,9 +95,8 @@ export function EditForm({
         <div className='w-full'>
           <textarea
             className='w-full p-2 shadow shadow-geraldine bg-white outline-geraldine focus:outline-blue focus:shadow-blue'
-            {...register('description')}
-            name='description'
             defaultValue={project?.description}
+            {...register('description')}
           />
           <p className='my-1 text-red text-sm'>{errors.description?.message}</p>
         </div>

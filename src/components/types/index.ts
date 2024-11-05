@@ -1,7 +1,7 @@
 import { Dispatch, LegacyRef, SetStateAction } from 'react';
 import {
   FieldErrors,
-  RegisterOptions,
+  SubmitHandler,
   UseFormHandleSubmit,
   UseFormRegister,
 } from 'react-hook-form';
@@ -38,25 +38,6 @@ export interface HomePanelProps {
   handleSearchYear: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export interface InputProps {
-  label?: string;
-  placeholder?: string;
-  defaultValue?: string;
-  type: string;
-  name: string;
-  register: UseFormRegister<{
-    color: string;
-    title: string;
-    description: string;
-    date: string;
-    client: string;
-    price: number;
-    size: string;
-  }>;
-  error?: string;
-  rules?: RegisterOptions;
-}
-
 export interface ProjectDetailProps {
   project: ProjectProps | undefined;
   carousel: {
@@ -89,7 +70,15 @@ export interface EditFormProps {
       },
       undefined
     >;
-    handleEditProject: (data: FormData) => Promise<void>;
+    handleEditProject: SubmitHandler<{
+      title: string;
+      date: string;
+      client: string;
+      price: number;
+      color: string;
+      size: string;
+      description: string;
+    }>;
     register: UseFormRegister<{
       color: string;
       title: string;
