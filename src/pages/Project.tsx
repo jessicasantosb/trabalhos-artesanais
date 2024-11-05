@@ -88,8 +88,7 @@ export function Project() {
 
           <button
             className='group flex items-center gap-2'
-            onClick={handleOpenEditForm}
-          >
+            onClick={handleOpenEditForm}>
             <MdEdit
               size={20}
               className='text-blue group-hover:text-geraldine'

@@ -33,8 +33,7 @@ export function Header() {
             <div
               className={`w-full bg-white absolute top-[60px] right-0 px-2 py-8 center flex-col gap-4 rounded shadow-lg transition-all md:relative md:top-0 md:p-0 md:flex-row md:gap-6 md:shadow-none z-50 ${
                 !isDropdown && 'hidden md:flex'
-              }`}
-            >
+              }`}>
               <p className='center gap-1'>
                 Olá,
                 <span className='max-w-32 tracking-tight break-words line-clamp-1'>
@@ -44,22 +43,19 @@ export function Header() {
               <Link
                 onClick={handleDropdown}
                 to={'/criar'}
-                className='headerBtn bg-geraldine hover:text-black'
-              >
+                className='headerBtn bg-geraldine hover:text-black'>
                 Novo
               </Link>
               <Link
                 onClick={handleDropdown}
                 to={'/grafico'}
-                className='headerBtn bg-blue hover:text-black'
-              >
+                className='headerBtn bg-blue hover:text-black'>
                 Gráfico
               </Link>
 
               <button
                 onClick={handleSignOut}
-                className='headerBtn border-black text-black'
-              >
+                className='headerBtn border-black text-black'>
                 Sair
                 <MdLogout size={24} />
               </button>

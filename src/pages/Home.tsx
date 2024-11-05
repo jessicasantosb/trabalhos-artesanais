@@ -38,7 +38,7 @@ export function Home() {
     const projectItem = project;
 
     const answer = window.confirm(
-      'Tem certeza que deseja apagar esse trabalho?'
+      'Tem certeza que deseja apagar esse trabalho?',
     );
 
     if (answer) {
@@ -53,7 +53,7 @@ export function Home() {
           await deleteObject(imageRef);
           toast.success('Deletado com sucesso!');
           setProjects(
-            projects.filter((project) => project.id !== projectItem.id)
+            projects.filter((project) => project.id !== projectItem.id),
           );
         } catch (error) {
           console.error(error);
@@ -74,7 +74,7 @@ export function Home() {
       collection(db, 'trabalhos'),
       where('uid', '==', user?.uid),
       where(field, '>=', input.toUpperCase()),
-      where(field, '<=', input.toUpperCase() + '\uf8ff')
+      where(field, '<=', input.toUpperCase() + '\uf8ff'),
     );
 
     const querySnapshot = await getDocs(q);
@@ -117,7 +117,7 @@ export function Home() {
     const q = query(
       collection(db, 'trabalhos'),
       where('uid', '==', user?.uid),
-      where('date', '==', yearField)
+      where('date', '==', yearField),
     );
 
     const querySnapshot = await getDocs(q);

@@ -14,7 +14,7 @@
 
 **_Objetivo_**
 
-Desenvolvi o projeto 
+Desenvolvi o projeto
 <a href="https://trabalhos-artesanais.vercel.app/"> Trabalhos Artesanais </a>
 com a finalidade de otimizar a gestão de vendas, funcionando como um caderno online. Os usuários podem cadastrar seus trabalhos de maneira intuitiva, permitindo um controle mais eficiente e um histórico completo das suas vendas.
 

@@ -10,36 +10,36 @@
     @apply flex items-center justify-center;
   }
   .error {
-    @apply text-red pt-4
+    @apply text-red pt-4;
   }
   /* header */
   .headerBtn {
-    @apply center gap-2 w-28 h-10 border bg-opacity-80 shadow-md hover:shadow-none hover:bg-opacity-70 hover:scale-95 transition-all
+    @apply center gap-2 w-28 h-10 border bg-opacity-80 shadow-md hover:shadow-none hover:bg-opacity-70 hover:scale-95 transition-all;
   }
   /* login/register */
   .authSection {
-    @apply w-full py-12 px-4 center
+    @apply w-full py-12 px-4 center;
   }
   .authContainer {
-    @apply min-h-96 min-w-64 grid md:grid-cols-2
+    @apply min-h-96 min-w-64 grid md:grid-cols-2;
   }
   .authImg {
-    @apply max-w-96 h-full hidden md:block
+    @apply max-w-96 h-full hidden md:block;
   }
   .authDiv {
-    @apply relative sm:min-w-96 bg-ligthblue p-4
+    @apply relative sm:min-w-96 bg-ligthblue p-4;
   }
   .authTitle {
-    @apply py-4 font-medium text-4xl text-center before:absolute before:top-[67px] before:right-24 before:h-2 before:w-12 before:bg-geraldine before:bg-opacity-50
+    @apply py-4 font-medium text-4xl text-center before:absolute before:top-[67px] before:right-24 before:h-2 before:w-12 before:bg-geraldine before:bg-opacity-50;
   }
   .authForm {
-    @apply flex flex-col
+    @apply flex flex-col;
   }
   .authBtn {
     @apply w-full h-10 my-6 uppercase font-bold border shadow-sm  bg-geraldine border-geraldine hover:bg-opacity-60 hover:scale-95 hover:shadow-none;
   }
   .authLink {
-    @apply underline opacity-95 hover:opacity-70
+    @apply underline opacity-95 hover:opacity-70;
   }
   /* home panel */
   .filterBtnDiv {
@@ -49,13 +49,13 @@
     @apply border-none bg-ligthblue p-2 outline-none focus:outline-none;
   }
   .filterBtn {
-    @apply m-1 bg-geraldine px-4 py-2 text-white
+    @apply m-1 bg-geraldine px-4 py-2 text-white;
   }
   /* footer */
   .footerTitle {
-    @apply font-bold pb-2 select-none
+    @apply font-bold pb-2 select-none;
   }
   .footerTitle ~ li {
-    @apply hover:underline
+    @apply hover:underline;
   }
 }

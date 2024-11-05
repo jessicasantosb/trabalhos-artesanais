@@ -24,13 +24,11 @@ export function HomeCard({
     <>
       <div
         className='group relative shadow-md shadow-geraldine rounded-xl'
-        data-testid='project'
-      >
+        data-testid='project'>
         <button
           className='absolute right-0 p-1 bg-geraldine hidden group-hover:block'
           onClick={handleDeleteProject}
-          data-testid='projectTrash'
-        >
+          data-testid='projectTrash'>
           <GoTrash size={18} />
         </button>
 

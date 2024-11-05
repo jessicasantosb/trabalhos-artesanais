@@ -16,7 +16,7 @@ describe('Components - HomeCard', () => {
           price='test'
           handleDeleteProject={() => 'test'}
         />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(screen.getByTestId('projectLink')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('Components - HomeCard', () => {
           price='test'
           handleDeleteProject={() => 'test'}
         />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     fireEvent.click(getByTestId('projectLink'));
@@ -59,7 +59,7 @@ describe('Components - HomeCard', () => {
           price='test'
           handleDeleteProject={() => 'test'}
         />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(getByTestId('projectTrash')).toHaveStyle({

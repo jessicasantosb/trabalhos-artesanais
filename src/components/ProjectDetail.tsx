@@ -30,8 +30,7 @@ export function ProjectDetail({
         <div
           ref={contentRef}
           className='h-full flex transition-opacity'
-          style={{ transform: `translateX(${imagePosition}px)` }}
-        >
+          style={{ transform: `translateX(${imagePosition}px)` }}>
           <div className={`center h-full min-w-full ${!skeleton && 'hidden'}`}>
             <IoIosImages size={32} className='text-geraldine' />
           </div>

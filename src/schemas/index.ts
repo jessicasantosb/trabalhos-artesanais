@@ -33,7 +33,7 @@ export const createSchema = z.object({
       z.coerce
         .number({ invalid_type_error: 'Insira um número válido' })
         .min(0.0001)
-        .max(99999999, { message: 'Valor inválido' })
+        .max(99999999, { message: 'Valor inválido' }),
     ),
   color: z
     .string()

@@ -41,8 +41,7 @@ export function Input({
             <button
               type='button'
               className='p-2 outline-none'
-              onClick={handleInputType}
-            >
+              onClick={handleInputType}>
               {inputType === 'password' ? <IoEye /> : <IoEyeOff />}
             </button>
           )}

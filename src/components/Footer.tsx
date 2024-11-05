@@ -15,8 +15,7 @@ export function Footer() {
             <a
               href='https://www.youtube.com/results?search_query=trabalhos+artesanais'
               target='_blank'
-              rel='noopener noreferrer'
-            >
+              rel='noopener noreferrer'>
               YOUTUBE
             </a>
           </li>
@@ -24,8 +23,7 @@ export function Footer() {
             <a
               href='https://www.pinterest.com/search/pins/?q=trabalhos%20artesanais&rs=typed'
               target='_blank'
-              rel='noopener noreferrer'
-            >
+              rel='noopener noreferrer'>
               PINTEREST
             </a>
           </li>

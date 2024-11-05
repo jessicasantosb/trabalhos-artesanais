@@ -40,8 +40,7 @@ export function Chart() {
       <div className='w-full'>
         <VictoryChart
           domainPadding={20}
-          animate={{ duration: 2000, easing: 'bounce' }}
-        >
+          animate={{ duration: 2000, easing: 'bounce' }}>
           <VictoryAxis
             style={{
               tickLabels: { fontSize: 6 },
@@ -52,8 +51,7 @@ export function Chart() {
             horizontal
             style={{ data: { fill: '#FF8F94' } }}
             data={graph}
-            labels={({ datum }) => datum.x}
-          ></VictoryBar>
+            labels={({ datum }) => datum.x}></VictoryBar>
         </VictoryChart>
       </div>
     </section>

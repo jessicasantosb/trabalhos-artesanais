@@ -16,7 +16,7 @@ describe('Components - Input', () => {
           placeholder='ex: Tapete em crochê'
           register={result.current.register}
         />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(getByPlaceholderText('ex: Tapete em crochê')).toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('Components - Input', () => {
           register={result.current.register}
           error='error test message'
         />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     const errorMessage = getByText('error test message');

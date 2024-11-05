@@ -7,7 +7,7 @@ describe('Components - Header', () => {
     render(
       <MemoryRouter>
         <Header />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(screen.getByTestId('logo')).toBeInTheDocument();

@@ -94,8 +94,7 @@ export function UploadImage({
         return (
           <div
             key={image.name}
-            className='relative group h-24 center basis-24 grow'
-          >
+            className='relative group h-24 center basis-24 grow'>
             <button>
               <GoTrash
                 size={32}

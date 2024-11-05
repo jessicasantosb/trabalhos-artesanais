@@ -7,13 +7,13 @@ describe('Components - Footer', () => {
     const { getByText } = render(
       <MemoryRouter>
         <Footer />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(getByText('ALGUMAS IDEIAS')).toBeInTheDocument();
     expect(getByText('SOBRE NÓS')).toBeInTheDocument();
     expect(
-      getByText('© 2024 - Alguns direitos reservados')
+      getByText('© 2024 - Alguns direitos reservados'),
     ).toBeInTheDocument();
   });
 });

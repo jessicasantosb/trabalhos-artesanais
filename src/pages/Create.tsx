@@ -87,8 +87,7 @@ export function Create() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-full flex flex-col gap-2'
-        >
+          className='w-full flex flex-col gap-2'>
           <Input
             name='title'
             type='text'

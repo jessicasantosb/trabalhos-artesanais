@@ -8,7 +8,7 @@ export function Head(props: HeadProps) {
     const metaTag = document.querySelector("meta[name='description']");
     metaTag?.setAttribute(
       'content',
-      `Transforme a maneira como você gerencia seus projetos com esse aplicativo de organização de trabalhos. ${props.description}`
+      `Transforme a maneira como você gerencia seus projetos com esse aplicativo de organização de trabalhos. ${props.description}`,
     );
   }, [props]);
 

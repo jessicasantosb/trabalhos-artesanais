@@ -8,8 +8,7 @@ export function FilterByYear({ years, handleSearchYear }: FilterByYearProps) {
       </label>
       <select
         className='bg-white border border-geraldine px-8 p-2 focus:border-2 focus:outline-0'
-        onChange={(e) => handleSearchYear(e)}
-      >
+        onChange={(e) => handleSearchYear(e)}>
         <option value='all'>todos</option>
         {years.map((year, index) => {
           return (

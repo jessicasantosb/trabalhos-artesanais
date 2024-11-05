@@ -1,9 +1,6 @@
 import { FilterByTextProps } from '../types';
 
-export function FilterByText({
-  placeholder,
-  onSearch,
-}: FilterByTextProps) {
+export function FilterByText({ placeholder, onSearch }: FilterByTextProps) {
   return (
     <input
       type='text'

@@ -75,8 +75,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         projects,
         setProjects,
         projectsDuplicated,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   );

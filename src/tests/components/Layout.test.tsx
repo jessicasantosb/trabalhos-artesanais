@@ -7,7 +7,7 @@ describe('Components - Layout', () => {
     render(
       <MemoryRouter>
         <Layout />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   });
 });

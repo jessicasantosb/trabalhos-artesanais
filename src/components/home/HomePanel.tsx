@@ -28,8 +28,7 @@ export function HomePanel({
 
         <button
           onClick={handleFilterButton}
-          className='md:text-lg center gap-2 hover:text-blue'
-        >
+          className='md:text-lg center gap-2 hover:text-blue'>
           Filtros
           <MdOutlineFilterList size={18} />
         </button>

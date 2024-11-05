@@ -7,7 +7,7 @@ describe('Components - Head', () => {
     render(
       <MemoryRouter>
         <Head title='Head title' description='Head description' />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
   });
 });

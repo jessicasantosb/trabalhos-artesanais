@@ -11,7 +11,7 @@ describe('Components - HomePanel', () => {
           years={[2022, 2023, 2024]}
           handleSearchYear={() => 'test'}
         />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(getByText('Criar um novo trabalho')).toBeInTheDocument();

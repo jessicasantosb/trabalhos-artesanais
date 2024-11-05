@@ -44,7 +44,15 @@ export interface InputProps {
   defaultValue?: string;
   type: string;
   name: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<{
+    color: string;
+    title: string;
+    description: string;
+    date: string;
+    client: string;
+    price: number;
+    size: string;
+  }>;
   error?: string;
   rules?: RegisterOptions;
 }
@@ -81,8 +89,16 @@ export interface EditFormProps {
       },
       undefined
     >;
-    handleEditProject: any;
-    register: any;
+    handleEditProject: (data: FormData) => Promise<void>;
+    register: UseFormRegister<{
+      color: string;
+      title: string;
+      description: string;
+      date: string;
+      client: string;
+      price: number;
+      size: string;
+    }>;
     errors: FieldErrors<{
       title: string;
       date: string;

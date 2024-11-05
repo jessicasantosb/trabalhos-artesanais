@@ -21,8 +21,7 @@ export function EditForm({
   return (
     <form
       onSubmit={handleSubmit(handleEditProject)}
-      className='my-6 flex flex-col items-center gap-4'
-    >
+      className='my-6 flex flex-col items-center gap-4'>
       <div className='w-full flex flex-col md:flex-row gap-2 md:gap-12 [&>*]:w-full [&>*]:center [&>*]:flex-col [&>*]:gap-2'>
         <div className='[&>*]:w-full [&>*]:flex [&>*]:items-start [&>*]:gap-2 [&>*]:md:h-16'>
           <label>
@@ -107,15 +106,13 @@ export function EditForm({
       <div className='w-full mt-2 flex justify-between'>
         <button
           type='submit'
-          className='w-28 h-10 shadow-md hover:shadow-none hover:scale-95 transition-all bg-geraldine hover:text-black'
-        >
+          className='w-28 h-10 shadow-md hover:shadow-none hover:scale-95 transition-all bg-geraldine hover:text-black'>
           Salvar
         </button>
         <button
           type='button'
           className='flex items-center gap-2 text-black hover:text-red hover:underline underline-offset-2'
-          onClick={() => setEditFormIsOpen(false)}
-        >
+          onClick={() => setEditFormIsOpen(false)}>
           Cancelar
           <MdCancel size={20} className='text-blue' />
         </button>
