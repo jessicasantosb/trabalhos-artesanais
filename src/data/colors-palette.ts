@@ -130,7 +130,7 @@ export const palettes: PalettesProps[] = [
     ],
   },
   {
-    title: 'contrasteForte',
+    title: 'contraste forte',
     palette: [
       { name: 'preto', color: '#000000' },
       { name: 'branco', color: '#FFFFFF' },
