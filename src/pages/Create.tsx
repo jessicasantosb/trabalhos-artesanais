@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 import { Head, Input, UploadImage } from '../components';
+import { Heading } from '../components/heading';
 import { useAuthContext } from '../hooks';
 import { createSchema } from '../schemas';
 import { db } from '../services';
@@ -72,12 +73,11 @@ export function Create() {
         title='Criar'
         description='Registre os dados do seu novo trabalho!'
       />
-
-      <h1 className='pt-14 pb-2 font-medium text-4xl'>Novo Cadastro</h1>
-      <p className='pb-14 text-center'>
-        adicione nos campos abaixo os dados do seu novo trabalho e não se
-        esqueça de clicar em salvar
-      </p>
+      <Heading
+        title='Novo Cadastro'
+        subtitle='adicione nos campos abaixo os dados do seu novo trabalho e não se
+        esqueça de clicar em salvar'
+      />
 
       <div>
         <UploadImage

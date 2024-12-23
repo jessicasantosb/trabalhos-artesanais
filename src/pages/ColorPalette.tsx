@@ -1,14 +1,15 @@
 import { Head } from '../components';
+import { Heading } from '../components/heading';
 import { palettes } from '../data/colors-palette';
 
 export function ColorPalette() {
   return (
     <section className='container m-auto p-4 center flex-col'>
       <Head title='Cores' description='Escolha uma paleta de cores!' />
-      <h1 className='pt-14 pb-2 font-medium text-4xl'>Paleta de Cores</h1>
-      <p className='pb-14 text-center'>
-        confira algumas paletas de cores que podem te inspirar na sua escolha
-      </p>
+      <Heading
+        title='Paleta de Cores'
+        subtitle='confira algumas paletas de cores que podem te inspirar na sua escolha'
+      />
 
       {palettes.map(({ title, palette }) => {
         return (

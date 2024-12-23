@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { VictoryAxis, VictoryBar, VictoryChart } from 'victory';
 
 import { Head } from '../components';
+import { Heading } from '../components/heading';
 import { useAuthContext } from '../hooks';
 import { formatPrice } from '../utils';
 
@@ -30,12 +31,11 @@ export function Chart() {
         title='Gráfico'
         description='Acompanhe os valores de suas vendas por gráficos!'
       />
-
-      <h1 className='pt-14 pb-2 font-medium text-4xl'>Gráfico</h1>
-      <p className='pb-14 text-center'>
-        acompanhe os nomes dos clientes com os valores de suas vendas realizadas
-        no gráfico abaixo
-      </p>
+      <Heading
+        title='Gráfico'
+        subtitle='acompanhe os nomes dos clientes com os valores de suas vendas realizadas
+        no gráfico abaixo'
+      />
 
       <div className='w-full'>
         <VictoryChart
