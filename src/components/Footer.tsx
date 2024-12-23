@@ -32,22 +32,20 @@ export function Footer() {
           <li className='footerTitle'>SOBRE NÓS</li>
           <li>
             <a href='#' rel='noopener noreferrer'>
-              TERMO DE USO
-            </a>
-          </li>
-          <li>
-            <a href='#' rel='noopener noreferrer'>
-              PRIVACIDADE
-            </a>
-          </li>
-          <li>
-            <a href='#' rel='noopener noreferrer'>
-              COOKIES
+              COMO USAR
             </a>
           </li>
         </ul>
       </div>
-      <p className='select-none'>&copy; 2024 - Alguns direitos reservados</p>
+      <p className='select-none'>
+        &copy; 2024 - Criado por {' '}
+        <Link
+        target='_blank'
+          to={'https://jessicasantosb.vercel.app/'}
+          className='hover:underline'>
+          Jessica Bandeira
+        </Link>
+      </p>
     </footer>
   );
 }
