@@ -22,7 +22,7 @@ export function ColorPalette() {
               <tbody key={name}>
                 <tr className='border'>
                   <td className='p-2'>{name}</td>
-                  <td className='text-right pr-2'>{color}</td>
+                  <td className='text-right pr-2 text-xs'>{color}</td>
                   <td
                     style={{ backgroundColor: color }}
                     className='text-right p-2 w-24'></td>
