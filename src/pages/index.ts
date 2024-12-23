@@ -5,3 +5,4 @@ export * from './Login';
 export * from './NotFound';
 export * from './Project';
 export * from './Register';
+export * from './ColorPalette';

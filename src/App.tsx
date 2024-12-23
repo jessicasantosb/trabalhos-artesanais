@@ -6,6 +6,7 @@ import { Layout } from './components';
 import { AuthProvider } from './context';
 import {
   Chart,
+  ColorPalette,
   Create,
   Home,
   Login,
@@ -61,6 +62,10 @@ function App() {
         {
           path: 'cadastrar',
           element: <Register />,
+        },
+        {
+          path: 'cores',
+          element: <ColorPalette />,
         },
       ],
     },
