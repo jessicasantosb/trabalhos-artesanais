@@ -7,7 +7,7 @@ export function ColorPalette() {
       <Head title='Cores' description='Escolha uma paleta de cores!' />
       <h1 className='pt-14 pb-2 font-medium text-4xl'>Paleta de Cores</h1>
       <p className='pb-14 text-center'>
-        confira algumas paletas de cores para ajudar com seu trabalho
+        confira algumas paletas de cores que podem te inspirar na sua escolha
       </p>
 
       {palettes.map(({ title, palette }) => {
@@ -24,8 +24,7 @@ export function ColorPalette() {
                   <td className='text-right pr-2'>{color}</td>
                   <td
                     style={{ backgroundColor: color }}
-                    className='text-right p-2 w-24'>
-                  </td>
+                    className='text-right p-2 w-24'></td>
                 </tr>
               </tbody>
             ))}
