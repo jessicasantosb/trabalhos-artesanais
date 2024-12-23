@@ -30,7 +30,7 @@ export const palettes: PalettesProps[] = [
     ],
   },
   {
-    title: 'pasteis',
+    title: 'pastéis',
     palette: [
       { name: 'rosa claro', color: '#FFC5E8' },
       { name: 'creme', color: '#FFEDD3' },
