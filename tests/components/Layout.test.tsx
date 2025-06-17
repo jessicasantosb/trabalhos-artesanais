@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Layout } from '../../components';
+import { Layout } from '../../src/components';
 import { vi } from 'vitest';
 
-vi.mock('../../components/Header', () => ({
+vi.mock('../../src/components/Header', () => ({
   Header: () => <div data-testid="header-component">Header Mock</div>
 }));
 
-vi.mock('../../components/Footer', () => ({
+vi.mock('../../src/components/Footer', () => ({
   Footer: () => <div data-testid="footer-component">Footer Mock</div>
 }));
 

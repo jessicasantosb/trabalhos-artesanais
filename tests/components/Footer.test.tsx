@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Footer } from '../../components';
+import { Footer } from '../../src/components';
 
 describe('Components - Footer', () => {
   it('should render Footer with correct headings', () => {

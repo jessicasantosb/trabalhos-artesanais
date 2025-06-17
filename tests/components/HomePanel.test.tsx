@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { HomePanel } from '../../components';
+import { HomePanel } from '../../src/components';
 import { vi } from 'vitest';
 
 describe('Components - HomePanel', () => {

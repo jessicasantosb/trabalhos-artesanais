@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Head } from '../../components';
+import { Head } from '../../src/components';
 import { vi } from 'vitest';
 
 describe('Components - Head', () => {

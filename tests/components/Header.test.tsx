@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Header } from '../../components';
+import { Header } from '../../src/components';
 import { vi } from 'vitest';
 
-vi.mock('../../hooks/useAuthContext', () => ({
+vi.mock('../../src/hooks/useAuthContext', () => ({
   useAuthContext: () => mockUseAuthContext()
 }));
 
